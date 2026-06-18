@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>페이지를 찾을 수 없습니다 | 천기누설</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="img/메인베너.png">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+      background: #0a0e14;
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* 별빛 배경 */
+    .stars {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: #fff;
+      animation: twinkle var(--dur, 3s) ease-in-out infinite var(--delay, 0s);
+      opacity: 0;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0; }
+      50% { opacity: var(--op, 0.7); }
+    }
+
+    .mystic-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: radial-gradient(circle at 50% 40%, #1a2332 0%, #0a0e14 70%);
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 40px 24px;
+      max-width: 480px;
+      width: 100%;
+    }
+
+    .error-code {
+      font-size: 7rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #c5a059, #e8c47a, #c5a059);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .desc {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.45);
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    .home-btn {
+      display: inline-block;
+      padding: 14px 36px;
+      background: linear-gradient(135deg, #c5a059 0%, #d4b475 100%);
+      color: #0a0e14;
+      font-size: 0.95rem;
+      font-weight: 800;
+      font-family: inherit;
+      text-decoration: none;
+      border-radius: 12px;
+      letter-spacing: 0.02em;
+      transition: all 0.3s;
+      box-shadow: 0 4px 20px rgba(197, 160, 89, 0.25);
+    }
+
+    .home-btn:hover {
+      background: linear-gradient(135deg, #d4b475 0%, #e8cc8a 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(197, 160, 89, 0.4);
+    }
+
+    .logo {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #c5a059, #e8c47a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.06em;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <div class="mystic-bg"></div>
+
+  <!-- 별빛 -->
+  <div class="stars" id="stars" aria-hidden="true"></div>
+
+  <a href="/" class="logo" aria-label="천기누설 홈으로">천기누설</a>
+
+  <div class="container">
+    <span class="icon" aria-hidden="true">🔮</span>
+    <div class="error-code" aria-label="404">404</div>
+    <h1>페이지를 찾을 수 없습니다</h1>
+    <p class="desc">
+      찾으시는 페이지가 존재하지 않거나<br>
+      주소가 변경되었을 수 있습니다.<br>
+      URL을 다시 확인해주세요.
+    </p>
+    <a href="/" class="home-btn">홈으로 돌아가기</a>
+  </div>
+
+  <script>
+    (function () {
+      var stars = document.getElementById('stars');
+      for (var i = 0; i < 80; i++) {
+        var s = document.createElement('div');
+        s.className = 'star';
+        var size = Math.random() * 2 + 0.5;
+        s.style.cssText = [
+          'width:' + size + 'px',
+          'height:' + size + 'px',
+          'top:' + Math.random() * 100 + '%',
+          'left:' + Math.random() * 100 + '%',
+          '--dur:' + (Math.random() * 3 + 2) + 's',
+          '--delay:-' + (Math.random() * 5) + 's',
+          '--op:' + (Math.random() * 0.5 + 0.3)
+        ].join(';');
+        stars.appendChild(s);
+      }
+    })();
+  </script>
+</body>
+</html>

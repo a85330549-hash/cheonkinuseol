@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>개인정보처리방침 | 천기누설</title>
+  <script>(function(){var l=localStorage.getItem('chunggi_lang')||localStorage.getItem('cheonki_lang')||'ko';document.documentElement.lang=l;document.documentElement.setAttribute('data-lang',l);})();</script>
+  <style>body{visibility:hidden;}</style>
+  <meta name="description" content="천기누설 개인정보처리방침 - 이용자의 개인정보 수집·이용·보호에 관한 사항을 안내합니다.">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="img/메인베너.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:      #0a0a0f;
+      --bg2:     #111118;
+      --gold:    #c9a84c;
+      --gold-l:  #e2c06a;
+      --border:  rgba(201,168,76,0.22);
+      --bdr-dim: rgba(255,255,255,0.07);
+      --text:    #e0e0e0;
+      --sub:     rgba(255,255,255,0.58);
+      --dim:     rgba(255,255,255,0.28);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Pretendard','Malgun Gothic',sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+
+    .mystic-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 0%, #1a1530 0%, #0a0a0f 65%); }
+    #star-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.55; }
+
+    .page-wrap { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; padding: 36px 20px 80px; }
+
+    .top-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 44px; }
+    .top-bar-right { display: flex; align-items: center; gap: 12px; }
+    .logo-link { font-family: 'Noto Serif KR',serif; font-size: 1.1rem; font-weight: 700; background: linear-gradient(135deg,var(--gold),var(--gold-l)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-decoration: none; letter-spacing: 0.06em; }
+    .back-link { font-size: 0.82rem; color: var(--dim); text-decoration: none; transition: color 0.2s; }
+    .back-link:hover { color: var(--gold); }
+    .lang-btn-sub { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 0.3rem 0.8rem; border-radius: 20px; cursor: pointer; font-size: 0.82rem; font-family: inherit; transition: all 0.2s; white-space: nowrap; }
+    .lang-btn-sub:hover { background: rgba(201,168,76,0.12); }
+
+    .page-header { text-align: center; margin-bottom: 48px; }
+    .page-header .icon { font-size: 2.8rem; display: block; margin-bottom: 16px; }
+    .page-header h1 { font-family: 'Noto Serif KR',serif; font-size: 1.75rem; font-weight: 700; color: #fff; margin-bottom: 10px; }
+    .effective-date { font-size: 0.82rem; color: var(--dim); padding: 6px 16px; border: 1px solid var(--bdr-dim); border-radius: 20px; display: inline-block; }
+
+    .divider { height: 1px; background: linear-gradient(90deg,transparent,var(--border),transparent); margin: 40px 0; }
+
+    .article { margin-bottom: 18px; background: var(--bg2); border: 0.5px solid var(--bdr-dim); border-radius: 14px; padding: 24px 26px; transition: border-color 0.2s; }
+    .article:hover { border-color: var(--border); }
+    .article-title { font-family: 'Noto Serif KR',serif; font-size: 0.97rem; font-weight: 700; color: var(--gold); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--bdr-dim); }
+    .article ul { padding-left: 0; list-style: none; }
+    .article ul li { font-size: 0.87rem; color: var(--sub); line-height: 1.85; padding: 4px 0 4px 16px; position: relative; }
+    .article ul li::before { content: '·'; position: absolute; left: 4px; color: var(--gold); font-weight: 700; }
+    .highlight { color: rgba(201,168,76,0.9); font-weight: 700; }
+
+    .bottom-area { text-align: center; margin-top: 48px; }
+    .btn-home { display: inline-flex; align-items: center; gap: 6px; padding: 12px 28px; border: 1px solid var(--border); border-radius: 10px; color: var(--gold); font-size: 0.88rem; font-weight: 700; font-family: inherit; text-decoration: none; background: rgba(201,168,76,0.08); transition: all 0.25s; margin-bottom: 28px; }
+    .btn-home:hover { background: rgba(201,168,76,0.18); border-color: var(--gold); transform: translateY(-1px); }
+    .footer-nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 12px; }
+    .footer-nav a { font-size: 0.79rem; color: rgba(201,168,76,0.55); text-decoration: none; transition: color 0.2s; }
+    .footer-nav a:hover { color: var(--gold); }
+    .footer-copy { font-size: 0.76rem; color: var(--dim); }
+
+    @media (max-width: 600px) { .page-wrap { padding: 24px 14px 60px; } .article { padding: 18px 16px; } .page-header h1 { font-size: 1.4rem; } }
+  </style>
+</head>
+<body>
+  <div class="mystic-bg"></div>
+  <canvas id="star-canvas" aria-hidden="true"></canvas>
+
+  <div class="page-wrap">
+    <div class="top-bar">
+      <a href="index.html" class="logo-link">천기누설</a>
+      <div class="top-bar-right">
+        <button id="lang-btn" onclick="toggleLanguage()" class="lang-btn-sub">영어</button>
+        <a href="index.html" class="back-link" data-ko="← 홈으로" data-en="← Home">← 홈으로</a>
+      </div>
+    </div>
+
+    <div class="page-header">
+      <span class="icon" aria-hidden="true">🔒</span>
+      <h1 data-ko="개인정보처리방침" data-en="Privacy Policy">개인정보처리방침</h1>
+      <span class="effective-date" data-ko="시행일: 2026년 6월 15일" data-en="Effective Date: June 15, 2026">시행일: 2026년 6월 15일</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="article">
+      <div class="article-title" data-ko="제1조. 수집하는 개인정보 항목" data-en="Article 1. Personal Information Collected">제1조. 수집하는 개인정보 항목</div>
+      <ul>
+        <li><span data-ko="이메일 주소, 프로필 이름 " data-en="Email address, profile name ">이메일 주소, 프로필 이름 </span><span class="highlight" data-ko="(구글 로그인 이용 시)" data-en="(when using Google login)">(구글 로그인 이용 시)</span></li>
+        <li><span data-ko="생년월일 " data-en="Date of birth ">생년월일 </span><span class="highlight" data-ko="(운세 서비스 이용 시)" data-en="(when using fortune services)">(운세 서비스 이용 시)</span></li>
+        <li data-ko="접속 IP 주소, 브라우저 종류 및 버전" data-en="Access IP address, browser type and version">접속 IP 주소, 브라우저 종류 및 버전</li>
+        <li data-ko="서비스 이용 기록, 접속 시간" data-en="Service usage records, access time">서비스 이용 기록, 접속 시간</li>
+      </ul>
+    </div>
+
+    <div class="article">
+      <div class="article-title" data-ko="제2조. 개인정보 수집 및 이용 목적" data-en="Article 2. Purpose of Collection and Use">제2조. 개인정보 수집 및 이용 목적</div>
+      <ul>
+        <li data-ko="회원 식별 및 서비스 제공" data-en="Member identification and service provision">회원 식별 및 서비스 제공</li>
+        <li data-ko="운세 결과 개인화 및 맞춤형 서비스 제공" data-en="Personalized fortune readings and customized service">운세 결과 개인화 및 맞춤형 서비스 제공</li>
+        <li data-ko="서비스 품질 개선 및 오류 분석" data-en="Service quality improvement and error analysis">서비스 품질 개선 및 오류 분석</li>
+        <li data-ko="공지사항 및 중요 안내 전달" data-en="Delivery of notices and important announcements">공지사항 및 중요 안내 전달</li>
+      </ul>
+    </div>
+
+    <div class="article">
+      <div class="article-title" data-ko="제3조. 개인정보 보유 및 이용 기간" data-en="Article 3. Retention Period">제3조. 개인정보 보유 및 이용 기간</div>
+      <ul>
+        <li data-ko="회원 탈퇴 시까지 보유 후 즉시 삭제" data-en="Retained until membership withdrawal, then immediately deleted">회원 탈퇴 시까지 보유 후 즉시 삭제</li>
+        <li data-ko="관련 법령에 따라 일정 기간 보존이 필요한 경우 해당 기간 동안 보유" data-en="Retained for the legally required period when applicable">관련 법령에 따라 일정 기간 보존이 필요한 경우 해당 기간 동안 보유</li>
+        <li data-ko="비회원 이용 시 입력 정보는 세션 종료 즉시 삭제" data-en="Non-member data is deleted immediately when the session ends">비회원 이용 시 입력 정보는 세션 종료 즉시 삭제</li>
+      </ul>
+    </div>
+
+    <div class="article">
+      <div class="article-title" data-ko="제4조. 개인정보 제3자 제공" data-en="Article 4. Third-Party Disclosure">제4조. 개인정보 제3자 제공</div>
+      <ul>
+        <li data-ko="원칙적으로 이용자의 개인정보를 외부에 제공하지 않습니다." data-en="Personal information is not provided to third parties in principle.">원칙적으로 이용자의 개인정보를 외부에 제공하지 않습니다.</li>
+        <li data-ko="법령에 의한 요청 또는 수사기관의 적법한 요구가 있는 경우 예외적으로 제공할 수 있습니다." data-en="May be provided as an exception when required by law or a lawful request from an investigative agency.">법령에 의한 요청 또는 수사기관의 적법한 요구가 있는 경우 예외적으로 제공할 수 있습니다.</li>
+      </ul>
+    </div>
+
+    <div class="article">
+      <div class="article-title" data-ko="제5조. 개인정보 처리 위탁" data-en="Article 5. Processing Consignment">제5조. 개인정보 처리 위탁</div>
+      <ul>
+        <li><span class="highlight">Google LLC</span><span data-ko=" — Firebase 인증 및 데이터베이스 서비스" data-en=" — Login authentication (Firebase)"> — Firebase 인증 및 데이터베이스 서비스</span></li>
+        <li><span class="highlight">Cloudflare Inc.</span><span data-ko=" — 웹 호스팅 및 CDN 서비스" data-en=" — Website hosting and CDN"> — 웹 호스팅 및 CDN 서비스</span></li>
+        <li><span class="highlight">Google LLC (AdSense)</span><span data-ko=" — 온라인 광고 서비스" data-en=" — Advertising service"> — 온라인 광고 서비스</span></li>
+      </ul>
+    </div>
+
+    <div class="article">
+      <div class="article-title" data-ko="제6조. 이용자의 권리" data-en="Article 6. User Rights">제6조. 이용자의 권리</div>
+      <ul>
+        <li data-ko="언제든지 개인정보 열람, 수정, 삭제를 요청할 수 있습니다." data-en="You may request access, modification, or deletion of personal information at any time.">언제든지 개인정보 열람, 수정, 삭제를 요청할 수 있습니다.</li>
+        <li data-ko="개인정보 처리 정지 및 동의 철회를 요청할 수 있습니다." data-en="You may request suspension of processing and withdrawal of consent.">개인정보 처리 정지 및 동의 철회를 요청할 수 있습니다.</li>
+        <li><span data-ko="문의 이메일: " data-en="Contact email: ">문의 이메일: </span><span class="highlight">a85330549@gmail.com</span></li>
+      </ul>
+    </div>
+
+    <div class="article">
+      <div class="article-title" data-ko="제7조. 개인정보 보호책임자" data-en="Article 7. Privacy Officer">제7조. 개인정보 보호책임자</div>
+      <ul>
+        <li><span data-ko="성명: " data-en="Name: ">성명: </span><span class="highlight" data-ko="류재희" data-en="Jaehee Ryu">류재희</span></li>
+        <li><span data-ko="이메일: " data-en="Email: ">이메일: </span><span class="highlight">a85330549@gmail.com</span></li>
+        <li data-ko="개인정보 관련 문의, 불만 처리 및 피해구제를 위해 연락하실 수 있습니다." data-en="Please contact us for personal information inquiries, complaints, and remedies.">개인정보 관련 문의, 불만 처리 및 피해구제를 위해 연락하실 수 있습니다.</li>
+      </ul>
+    </div>
+
+    <div class="article">
+      <div class="article-title" data-ko="제8조. 쿠키(Cookie) 사용" data-en="Article 8. Cookie Usage">제8조. 쿠키(Cookie) 사용</div>
+      <ul>
+        <li data-ko="서비스 이용 편의 및 통계 분석을 위해 쿠키를 사용합니다." data-en="Cookies are used for service convenience and statistical analysis.">서비스 이용 편의 및 통계 분석을 위해 쿠키를 사용합니다.</li>
+        <li data-ko="브라우저 설정을 통해 쿠키 저장을 거부할 수 있습니다." data-en="You can refuse cookie storage through browser settings.">브라우저 설정을 통해 쿠키 저장을 거부할 수 있습니다.</li>
+        <li data-ko="쿠키 거부 시 일부 서비스 이용이 제한될 수 있습니다." data-en="Some services may be restricted if cookies are refused.">쿠키 거부 시 일부 서비스 이용이 제한될 수 있습니다.</li>
+      </ul>
+    </div>
+
+    <div class="article">
+      <div class="article-title" data-ko="제9조. 광고 서비스" data-en="Article 9. Advertising Service">제9조. 광고 서비스</div>
+      <ul>
+        <li><span data-ko="본 서비스는 " data-en="This service displays ">본 서비스는 </span><span class="highlight">Google AdSense</span><span data-ko=" 광고를 게재합니다." data-en=" advertisements."> 광고를 게재합니다.</span></li>
+        <li data-ko="Google은 맞춤 광고 제공을 위해 쿠키를 사용할 수 있습니다." data-en="Google may use cookies to provide personalized ads.">Google은 맞춤 광고 제공을 위해 쿠키를 사용할 수 있습니다.</li>
+        <li>
+          <span data-ko="광고 개인화 설정은 " data-en="Ad personalization settings can be changed at ">광고 개인화 설정은 </span>
+          <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" style="color:var(--gold);text-decoration:underline;" data-ko="Google 광고 설정" data-en="Google Ads Settings">Google 광고 설정</a>
+          <span data-ko="에서 변경 가능합니다." data-en=".">에서 변경 가능합니다.</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="article">
+      <div class="article-title" data-ko="제10조. 개인정보처리방침 변경" data-en="Article 10. Policy Changes">제10조. 개인정보처리방침 변경</div>
+      <ul>
+        <li data-ko="본 방침은 법령 또는 서비스 변경에 따라 수정될 수 있습니다." data-en="This policy may be revised in accordance with laws or service changes.">본 방침은 법령 또는 서비스 변경에 따라 수정될 수 있습니다.</li>
+        <li data-ko="변경 사항은 공지사항을 통해 사전 안내드립니다." data-en="Changes will be announced in advance through notices.">변경 사항은 공지사항을 통해 사전 안내드립니다.</li>
+        <li><span data-ko="현행 시행일: " data-en="Current Effective Date: ">현행 시행일: </span><span class="highlight" data-ko="2026년 6월 15일" data-en="June 15, 2026">2026년 6월 15일</span></li>
+      </ul>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="bottom-area">
+      <a href="index.html" class="btn-home" data-ko="← 홈으로 돌아가기" data-en="← Back to Home">← 홈으로 돌아가기</a>
+      <nav class="footer-nav" aria-label="페이지 내비게이션">
+        <a href="privacy.html" data-ko="개인정보처리방침" data-en="Privacy Policy">개인정보처리방침</a>
+        <a href="terms.html" data-ko="이용약관" data-en="Terms of Service">이용약관</a>
+        <a href="notice.html" data-ko="공지사항" data-en="Notice">공지사항</a>
+        <a href="contact.html" data-ko="문의하기" data-en="Contact">문의하기</a>
+      </nav>
+      <p class="footer-copy">© 2026 천기누설. All rights reserved.</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      /* ── 별빛 캔버스 ── */
+      var canvas = document.getElementById('star-canvas');
+      var ctx = canvas.getContext('2d');
+      var stars = [];
+      function resize() { canvas.width = innerWidth; canvas.height = innerHeight; }
+      function initStars() {
+        stars = [];
+        var n = Math.floor(canvas.width * canvas.height / 9000);
+        for (var i = 0; i < n; i++) stars.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*1.1+0.3, op: Math.random()*0.45+0.1, sp: Math.random()*0.007+0.003, ph: Math.random()*Math.PI*2 });
+      }
+      var t = 0;
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height); t += 0.012;
+        for (var i = 0; i < stars.length; i++) { var s = stars[i]; ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2); ctx.fillStyle = 'rgba(255,255,255,'+(s.op*(0.5+0.5*Math.sin(t*s.sp*60+s.ph)))+')'; ctx.fill(); }
+        requestAnimationFrame(draw);
+      }
+      resize(); initStars(); draw();
+      window.addEventListener('resize', function () { resize(); initStars(); });
+
+      /* ── 언어 전환 ── */
+      var PAGE_TITLES = { ko: '개인정보처리방침 | 천기누설', en: 'Privacy Policy | Cheonkinuseol' };
+
+      function applyLang(lang) {
+        document.querySelectorAll('[data-ko][data-en]').forEach(function (el) {
+          if (el.children.length === 0) el.textContent = lang === 'en' ? el.dataset.en : el.dataset.ko;
+        });
+        var btn = document.getElementById('lang-btn');
+        if (btn) btn.textContent = lang === 'ko' ? '영어' : '한국어';
+        document.title = PAGE_TITLES[lang] || PAGE_TITLES.ko;
+        document.documentElement.lang = lang;
+        localStorage.setItem('chunggi_lang', lang);
+        localStorage.setItem('cheonki_lang', lang);
+        document.body.style.visibility = 'visible';
+      }
+
+      window.toggleLanguage = function () {
+        var lang = localStorage.getItem('chunggi_lang') || 'ko';
+        applyLang(lang === 'ko' ? 'en' : 'ko');
+      };
+
+      document.addEventListener('DOMContentLoaded', function () {
+        var lang = localStorage.getItem('chunggi_lang') || localStorage.getItem('cheonki_lang') || 'ko';
+        applyLang(lang);
+      });
+    })();
+  </script>
+</body>
+</html>

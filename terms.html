@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이용약관 | 천기누설</title>
+  <script>(function(){var l=localStorage.getItem('chunggi_lang')||localStorage.getItem('cheonki_lang')||'ko';document.documentElement.lang=l;document.documentElement.setAttribute('data-lang',l);})();</script>
+  <style>body{visibility:hidden;}</style>
+  <meta name="description" content="천기누설 이용약관 - 서비스 이용에 관한 기본 사항을 안내합니다.">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="img/메인베너.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:      #0a0a0f;
+      --bg2:     #111118;
+      --gold:    #c9a84c;
+      --gold-l:  #e2c06a;
+      --border:  rgba(201,168,76,0.22);
+      --bdr-dim: rgba(255,255,255,0.07);
+      --text:    #e0e0e0;
+      --sub:     rgba(255,255,255,0.58);
+      --dim:     rgba(255,255,255,0.28);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Pretendard','Malgun Gothic',sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+
+    .mystic-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 0%, #1a1530 0%, #0a0a0f 65%); }
+    #star-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.55; }
+
+    .page-wrap { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; padding: 36px 20px 80px; }
+
+    .top-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 44px; }
+    .top-bar-right { display: flex; align-items: center; gap: 12px; }
+    .logo-link { font-family: 'Noto Serif KR',serif; font-size: 1.1rem; font-weight: 700; background: linear-gradient(135deg,var(--gold),var(--gold-l)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-decoration: none; letter-spacing: 0.06em; }
+    .back-link { font-size: 0.82rem; color: var(--dim); text-decoration: none; transition: color 0.2s; }
+    .back-link:hover { color: var(--gold); }
+    .lang-btn-sub { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 0.3rem 0.8rem; border-radius: 20px; cursor: pointer; font-size: 0.82rem; font-family: inherit; transition: all 0.2s; white-space: nowrap; }
+    .lang-btn-sub:hover { background: rgba(201,168,76,0.12); }
+
+    .page-header { text-align: center; margin-bottom: 48px; }
+    .page-header .icon { font-size: 2.8rem; display: block; margin-bottom: 16px; }
+    .page-header h1 { font-family: 'Noto Serif KR',serif; font-size: 1.75rem; font-weight: 700; color: #fff; margin-bottom: 10px; }
+    .effective-date { font-size: 0.82rem; color: var(--dim); padding: 6px 16px; border: 1px solid var(--bdr-dim); border-radius: 20px; display: inline-block; }
+
+    .divider { height: 1px; background: linear-gradient(90deg,transparent,var(--border),transparent); margin: 40px 0; }
+
+    .article { margin-bottom: 18px; background: var(--bg2); border: 0.5px solid var(--bdr-dim); border-radius: 14px; padding: 24px 26px; transition: border-color 0.2s; }
+    .article:hover { border-color: var(--border); }
+    .article-title { font-family: 'Noto Serif KR',serif; font-size: 0.97rem; font-weight: 700; color: var(--gold); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--bdr-dim); }
+    .article p { font-size: 0.87rem; color: var(--sub); line-height: 1.85; margin-bottom: 10px; }
+    .article p:last-child { margin-bottom: 0; }
+    .article ul { padding-left: 0; list-style: none; margin-top: 8px; }
+    .article ul li { font-size: 0.87rem; color: var(--sub); line-height: 1.85; padding: 4px 0 4px 16px; position: relative; }
+    .article ul li::before { content: '·'; position: absolute; left: 4px; color: var(--gold); font-weight: 700; }
+
+    .bottom-area { text-align: center; margin-top: 48px; }
+    .btn-home { display: inline-flex; align-items: center; gap: 6px; padding: 12px 28px; border: 1px solid var(--border); border-radius: 10px; color: var(--gold); font-size: 0.88rem; font-weight: 700; font-family: inherit; text-decoration: none; background: rgba(201,168,76,0.08); transition: all 0.25s; margin-bottom: 28px; }
+    .btn-home:hover { background: rgba(201,168,76,0.18); border-color: var(--gold); transform: translateY(-1px); }
+    .footer-nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 12px; }
+    .footer-nav a { font-size: 0.79rem; color: rgba(201,168,76,0.55); text-decoration: none; transition: color 0.2s; }
+    .footer-nav a:hover { color: var(--gold); }
+    .footer-copy { font-size: 0.76rem; color: var(--dim); }
+
+    @media (max-width: 600px) { .page-wrap { padding: 24px 14px 60px; } .article { padding: 18px 16px; } .page-header h1 { font-size: 1.4rem; } }
+  </style>
+</head>
+<body>
+  <div class="mystic-bg"></div>
+  <canvas id="star-canvas" aria-hidden="true"></canvas>
+
+  <div class="page-wrap">
+    <div class="top-bar">
+      <a href="index.html" class="logo-link">천기누설</a>
+      <div class="top-bar-right">
+        <button id="lang-btn" onclick="toggleLanguage()" class="lang-btn-sub">영어</button>
+        <a href="index.html" class="back-link" data-ko="← 홈으로" data-en="← Home">← 홈으로</a>
+      </div>
+    </div>
+
+    <div class="page-header">
+      <span class="icon" aria-hidden="true">📋</span>
+      <h1 data-ko="이용약관" data-en="Terms of Service">이용약관</h1>
+      <span class="effective-date" data-ko="시행일: 2026년 6월 15일" data-en="Effective Date: June 15, 2026">시행일: 2026년 6월 15일</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="article">
+      <div class="article-title" data-ko="제1조. 목적" data-en="Article 1. Purpose">제1조. 목적</div>
+      <p data-ko='본 약관은 천기누설(이하 "서비스")이 제공하는 운세 서비스 이용에 관한 기본적인 사항을 규정합니다.' data-en='These terms govern the basic conditions for using the fortune services provided by Cheonkinuseol (hereinafter "Service").'>본 약관은 천기누설(이하 "서비스")이 제공하는 운세 서비스 이용에 관한 기본적인 사항을 규정합니다.</p>
+    </div>
+
+    <div class="article">
+      <div class="article-title" data-ko="제2조. 서비스 내용" data-en="Article 2. Service Content">제2조. 서비스 내용</div>
+      <p data-ko="천기누설은 다음과 같은 서비스를 제공합니다." data-en="Cheonkinuseol provides the following services.">천기누설은 다음과 같은 서비스를 제공합니다.</p>
+      <ul>
+        <li data-ko="사주팔자 분석 서비스" data-en="BaZi (Four Pillars) analysis service">사주팔자 분석 서비스</li>
+        <li data-ko="타로카드 운세 서비스" data-en="Tarot card fortune service">타로카드 운세 서비스</li>
+        <li data-ko="별자리 운세 서비스" data-en="Zodiac fortune service">별자리 운세 서비스</li>
+        <li data-ko="월간/연간 운세 서비스" data-en="Monthly/annual fortune service">월간/연간 운세 서비스</li>
+      </ul>
+    </div>
+
+    <div class="article">
+      <div class="article-title" data-ko="제3조. 이용 제한" data-en="Article 3. Usage Restrictions">제3조. 이용 제한</div>
+      <ul>
+        <li data-ko="만 14세 미만 이용 제한" data-en="Users under 14 years of age are restricted">만 14세 미만 이용 제한</li>
+        <li data-ko="상업적 무단 이용 금지" data-en="Unauthorized commercial use is prohibited">상업적 무단 이용 금지</li>
+        <li data-ko="콘텐츠 무단 복제 금지" data-en="Unauthorized reproduction of content is prohibited">콘텐츠 무단 복제 금지</li>
+      </ul>
+    </div>
+
+    <div class="article">
+      <div class="article-title" data-ko="제4조. 면책조항" data-en="Article 4. Disclaimer">제4조. 면책조항</div>
+      <ul>
+        <li data-ko="운세 서비스는 참고용으로만 제공됩니다." data-en="Fortune services are provided for reference purposes only.">운세 서비스는 참고용으로만 제공됩니다.</li>
+        <li data-ko="실제 의사결정에 대한 책임은 이용자 본인에게 있습니다." data-en="The user is solely responsible for their own decisions.">실제 의사결정에 대한 책임은 이용자 본인에게 있습니다.</li>
+        <li data-ko="서비스 중단에 따른 손해에 대해 배상하지 않습니다." data-en="No compensation will be provided for damages due to service interruption.">서비스 중단에 따른 손해에 대해 배상하지 않습니다.</li>
+      </ul>
+    </div>
+
+    <div class="article">
+      <div class="article-title" data-ko="제5조. 광고" data-en="Article 5. Advertising">제5조. 광고</div>
+      <ul>
+        <li data-ko="서비스 내 Google AdSense 광고가 게재될 수 있습니다." data-en="Google AdSense advertisements may appear within the service.">서비스 내 Google AdSense 광고가 게재될 수 있습니다.</li>
+        <li data-ko="광고 클릭은 이용자의 자유 의사에 따릅니다." data-en="Clicking on ads is at the user's own discretion.">광고 클릭은 이용자의 자유 의사에 따릅니다.</li>
+      </ul>
+    </div>
+
+    <div class="article">
+      <div class="article-title" data-ko="제6조. 준거법 및 분쟁 해결" data-en="Article 6. Governing Law">제6조. 준거법 및 분쟁 해결</div>
+      <ul>
+        <li data-ko="본 약관은 대한민국 법률을 적용합니다." data-en="The laws of the Republic of Korea apply to these terms.">본 약관은 대한민국 법률을 적용합니다.</li>
+        <li data-ko="분쟁 발생 시 운영자 소재지 관할 법원을 전속 관할로 합니다." data-en="In the event of a dispute, the court with jurisdiction over the operator's location shall have exclusive jurisdiction.">분쟁 발생 시 운영자 소재지 관할 법원을 전속 관할로 합니다.</li>
+      </ul>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="bottom-area">
+      <a href="index.html" class="btn-home" data-ko="← 홈으로 돌아가기" data-en="← Back to Home">← 홈으로 돌아가기</a>
+      <nav class="footer-nav" aria-label="페이지 내비게이션">
+        <a href="privacy.html" data-ko="개인정보처리방침" data-en="Privacy Policy">개인정보처리방침</a>
+        <a href="terms.html" data-ko="이용약관" data-en="Terms of Service">이용약관</a>
+        <a href="notice.html" data-ko="공지사항" data-en="Notice">공지사항</a>
+        <a href="contact.html" data-ko="문의하기" data-en="Contact">문의하기</a>
+      </nav>
+      <p style="font-size:0.78rem;color:var(--dim);margin-bottom:6px;" data-ko="운영자: 류재희 | 이메일: a85330549@gmail.com" data-en="Operator: Jaehee Ryu | Email: a85330549@gmail.com">운영자: 류재희 | 이메일: a85330549@gmail.com</p>
+      <p class="footer-copy">© 2026 천기누설. All rights reserved.</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var canvas = document.getElementById('star-canvas');
+      var ctx = canvas.getContext('2d');
+      var stars = [];
+      function resize() { canvas.width = innerWidth; canvas.height = innerHeight; }
+      function initStars() {
+        stars = [];
+        var n = Math.floor(canvas.width * canvas.height / 9000);
+        for (var i = 0; i < n; i++) stars.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*1.1+0.3, op: Math.random()*0.45+0.1, sp: Math.random()*0.007+0.003, ph: Math.random()*Math.PI*2 });
+      }
+      var t = 0;
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height); t += 0.012;
+        for (var i = 0; i < stars.length; i++) { var s = stars[i]; ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2); ctx.fillStyle = 'rgba(255,255,255,'+(s.op*(0.5+0.5*Math.sin(t*s.sp*60+s.ph)))+')'; ctx.fill(); }
+        requestAnimationFrame(draw);
+      }
+      resize(); initStars(); draw();
+      window.addEventListener('resize', function () { resize(); initStars(); });
+
+      var PAGE_TITLES = { ko: '이용약관 | 천기누설', en: 'Terms of Service | Cheonkinuseol' };
+
+      function applyLang(lang) {
+        document.querySelectorAll('[data-ko][data-en]').forEach(function (el) {
+          if (el.children.length === 0) el.textContent = lang === 'en' ? el.dataset.en : el.dataset.ko;
+        });
+        var btn = document.getElementById('lang-btn');
+        if (btn) btn.textContent = lang === 'ko' ? '영어' : '한국어';
+        document.title = PAGE_TITLES[lang] || PAGE_TITLES.ko;
+        document.documentElement.lang = lang;
+        localStorage.setItem('chunggi_lang', lang);
+        localStorage.setItem('cheonki_lang', lang);
+        document.body.style.visibility = 'visible';
+      }
+
+      window.toggleLanguage = function () {
+        var lang = localStorage.getItem('chunggi_lang') || 'ko';
+        applyLang(lang === 'ko' ? 'en' : 'ko');
+      };
+
+      document.addEventListener('DOMContentLoaded', function () {
+        var lang = localStorage.getItem('chunggi_lang') || localStorage.getItem('cheonki_lang') || 'ko';
+        applyLang(lang);
+      });
+    })();
+  </script>
+</body>
+</html>
