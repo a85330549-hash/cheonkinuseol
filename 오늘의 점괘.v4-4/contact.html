@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>문의하기 | 천기누설</title>
+  <script>(function(){var l=localStorage.getItem('chunggi_lang')||localStorage.getItem('cheonki_lang')||'ko';document.documentElement.lang=l;document.documentElement.setAttribute('data-lang',l);})();</script>
+  <style>body{visibility:hidden;}</style>
+  <meta name="description" content="천기누설 문의하기 - 궁금한 점을 남겨주시면 24시간 이내 답변 드립니다.">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="img/메인베너.png">
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    emailjs.init("YOUR_PUBLIC_KEY");
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg2: #111118;
+      --bg3: #16161f;
+      --gold: #c9a84c;
+      --gold-light: #e2c06a;
+      --gold-dim: rgba(201, 168, 76, 0.18);
+      --border: rgba(201, 168, 76, 0.2);
+      --border-dim: rgba(255, 255, 255, 0.07);
+      --text: #e0e0e0;
+      --text-sub: rgba(255, 255, 255, 0.55);
+      --text-dim: rgba(255, 255, 255, 0.3);
+      --red: #e87070;
+      --red-bg: rgba(232, 112, 112, 0.1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .mystic-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: radial-gradient(ellipse at 50% 0%, #1a1530 0%, #0a0a0f 65%);
+      pointer-events: none;
+    }
+
+    #star-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+
+    .top-bar-right { display: flex; align-items: center; gap: 12px; }
+
+    .logo-link {
+      font-size: 1.1rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+      letter-spacing: 0.06em;
+    }
+
+    .back-link {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--gold); }
+
+    .lang-btn-sub { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 0.3rem 0.8rem; border-radius: 20px; cursor: pointer; font-size: 0.82rem; font-family: inherit; transition: all 0.2s; white-space: nowrap; }
+    .lang-btn-sub:hover { background: rgba(201,168,76,0.12); }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 44px;
+    }
+
+    .page-header .icon {
+      font-size: 2.8rem;
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .page-header h1 {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .page-header .subtitle {
+      font-size: 0.9rem;
+      color: var(--text-sub);
+      line-height: 1.75;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 40px 0;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--gold);
+      margin-bottom: 6px;
+      letter-spacing: 0.03em;
+    }
+    .section-sub {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      margin-bottom: 20px;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .faq-item {
+      background: var(--bg2);
+      border: 0.5px solid var(--border-dim);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.25s;
+    }
+    .faq-item.open { border-color: var(--border); }
+
+    .faq-question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 18px;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 700;
+      font-family: inherit;
+      text-align: left;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .faq-question:hover { color: var(--gold); }
+    .faq-item.open .faq-question { color: var(--gold); }
+
+    .faq-arrow {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      color: var(--gold);
+      transition: transform 0.3s ease;
+    }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.25s ease;
+      padding: 0 18px;
+    }
+    .faq-item.open .faq-answer { max-height: 200px; padding: 0 18px 16px; }
+
+    .faq-answer p {
+      font-size: 0.86rem;
+      color: var(--text-sub);
+      line-height: 1.85;
+      border-top: 1px solid var(--border-dim);
+      padding-top: 12px;
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 11px 22px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--gold);
+      font-size: 0.88rem;
+      font-weight: 700;
+      font-family: inherit;
+      text-decoration: none;
+      background: var(--gold-dim);
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .btn-outline:hover {
+      background: rgba(201, 168, 76, 0.28);
+      border-color: var(--gold);
+      transform: translateY(-1px);
+    }
+
+    .form-card {
+      background: var(--bg2);
+      border: 1px solid var(--border-dim);
+      border-radius: 16px;
+      padding: 32px 28px;
+    }
+
+    .form-group { margin-bottom: 18px; }
+
+    .form-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+    .form-label .req { color: var(--gold); margin-left: 3px; }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: 13px 16px;
+      background: var(--bg3);
+      border: 1px solid var(--border-dim);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .form-input::placeholder,
+    .form-textarea::placeholder { color: var(--text-dim); }
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: rgba(201, 168, 76, 0.55);
+      box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.08);
+    }
+
+    .form-select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a84c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 38px;
+      cursor: pointer;
+    }
+    .form-select option { background: #1a1a2e; color: var(--text); }
+
+    .form-textarea { min-height: 150px; resize: vertical; line-height: 1.7; }
+
+    .agree-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-dim);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .agree-row:hover { border-color: var(--border); }
+
+    .agree-row input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--gold);
+      flex-shrink: 0;
+      margin-top: 2px;
+      cursor: pointer;
+    }
+
+    .agree-label {
+      font-size: 0.82rem;
+      color: var(--text-sub);
+      line-height: 1.65;
+      cursor: pointer;
+      user-select: none;
+    }
+    .agree-label strong { color: var(--text); font-weight: 700; }
+
+    .error-msg {
+      display: none;
+      background: var(--red-bg);
+      border: 1px solid rgba(232, 112, 112, 0.3);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 0.85rem;
+      color: var(--red);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      border: none;
+      border-radius: 12px;
+      color: #0a0a0f;
+      font-size: 1rem;
+      font-weight: 900;
+      font-family: inherit;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      transition: all 0.3s;
+      margin-top: 6px;
+    }
+    .btn-primary:hover:not(:disabled) {
+      background: linear-gradient(135deg, var(--gold-light) 0%, #f0d07a 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(201, 168, 76, 0.35);
+    }
+    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    #contact-success {
+      display: none;
+      text-align: center;
+      padding: 48px 24px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .success-icon { font-size: 3.5rem; display: block; margin-bottom: 20px; }
+
+    .success-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .success-msg {
+      font-size: 0.88rem;
+      color: var(--text-sub);
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+
+    .success-email { font-size: 0.82rem; color: var(--text-dim); margin-bottom: 28px; }
+
+    .page-footer {
+      margin-top: 60px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border-dim);
+      text-align: center;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px 20px;
+      margin-bottom: 14px;
+    }
+    .footer-links a {
+      font-size: 0.8rem;
+      color: rgba(201, 168, 76, 0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy { font-size: 0.76rem; color: var(--text-dim); }
+
+    @media (max-width: 600px) {
+      .page-wrap { padding: 24px 14px 60px; }
+      .page-header h1 { font-size: 1.5rem; }
+      .form-card { padding: 22px 16px; }
+      .form-card .section-title { font-size: 1rem; }
+    }
+  </style>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NC3CB4QTRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-NC3CB4QTRL');
+  </script>
+</head>
+<body>
+  <div class="mystic-bg"></div>
+  <canvas id="star-canvas" aria-hidden="true"></canvas>
+
+  <div class="page-wrap">
+
+    <div class="top-bar">
+      <a href="index.html" class="logo-link" aria-label="천기누설 홈으로">천기누설</a>
+      <div class="top-bar-right">
+        <button id="lang-btn" onclick="toggleLanguage()" class="lang-btn-sub">영어</button>
+        <a href="index.html" class="back-link" data-ko="← 홈으로" data-en="← Home">← 홈으로</a>
+      </div>
+    </div>
+
+    <div class="page-header">
+      <span class="icon" aria-hidden="true">✉️</span>
+      <h1 data-ko="문의하기" data-en="Contact Us">문의하기</h1>
+      <p class="subtitle">
+        <span data-ko="궁금한 점이 있으시면 언제든지 문의해주세요." data-en="Feel free to contact us anytime.">궁금한 점이 있으시면 언제든지 문의해주세요.</span><br>
+        <span data-ko="24시간 이내 답변 드리겠습니다." data-en="We will respond within 24 hours.">24시간 이내 답변 드리겠습니다.</span>
+      </p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section-title" data-ko="자주 묻는 질문" data-en="FAQ">자주 묻는 질문</div>
+    <p class="section-sub" data-ko="문의 전 아래 FAQ를 먼저 확인해보세요." data-en="Please check the FAQ below before contacting us.">문의 전 아래 FAQ를 먼저 확인해보세요.</p>
+
+    <div class="faq-list" role="list">
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+          <span data-ko="천기누설은 무료인가요?" data-en="Is Cheonkinuseol free?">천기누설은 무료인가요?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <p data-ko="네, 모든 서비스는 완전 무료입니다. 광고가 게재될 수 있으나 서비스 이용은 무료입니다." data-en="Yes, all services are completely free. Ads may appear, but the service itself is free to use.">네, 모든 서비스는 완전 무료입니다. 광고가 게재될 수 있으나 서비스 이용은 무료입니다.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+          <span data-ko="사주 계산이 정확한가요?" data-en="Is the BaZi calculation accurate?">사주 계산이 정확한가요?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <p data-ko="만세력 기반으로 정확하게 계산되며 생년월일시를 정확히 입력할수록 더 정밀한 결과를 얻을 수 있습니다." data-en="It is calculated accurately based on the traditional calendar. The more precisely you enter your date and time of birth, the more accurate the result.">만세력 기반으로 정확하게 계산되며 생년월일시를 정확히 입력할수록 더 정밀한 결과를 얻을 수 있습니다.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+          <span data-ko="개인정보가 저장되나요?" data-en="Is my personal information stored?">개인정보가 저장되나요?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <p data-ko="입력한 생년월일 등 개인정보는 서버에 저장되지 않습니다. 브라우저 세션 내에서만 사용됩니다." data-en="Personal information such as your date of birth is not stored on the server. It is only used within your browser session.">입력한 생년월일 등 개인정보는 서버에 저장되지 않습니다. 브라우저 세션 내에서만 사용됩니다.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+          <span data-ko="모바일에서도 사용 가능한가요?" data-en="Can I use it on mobile?">모바일에서도 사용 가능한가요?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <p data-ko="네, 모바일 최적화가 되어 있어 스마트폰에서도 편리하게 이용하실 수 있습니다." data-en="Yes, it is mobile-optimized and can be used conveniently on smartphones.">네, 모바일 최적화가 되어 있어 스마트폰에서도 편리하게 이용하실 수 있습니다.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+          <span data-ko="영어 버전도 있나요?" data-en="Is there an English version?">영어 버전도 있나요?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <p data-ko="네, 홈 화면 우측 상단 'English' 버튼을 클릭하시면 영문 버전으로 전환됩니다." data-en="Yes, click the 'English' button at the top right of the home screen to switch to the English version.">네, 홈 화면 우측 상단 'English' 버튼을 클릭하시면 영문 버전으로 전환됩니다.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+          <span data-ko="운세가 매일 바뀌나요?" data-en="Does the fortune change every day?">운세가 매일 바뀌나요?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <p data-ko="네, 오늘의 운세는 매일 자정 자동으로 업데이트됩니다." data-en="Yes, today's fortune is automatically updated every day at midnight.">네, 오늘의 운세는 매일 자정 자동으로 업데이트됩니다.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="margin-bottom: 40px;">
+      <a href="#contact-form" class="btn-outline" onclick="document.getElementById('contact-form').scrollIntoView({behavior:'smooth'}); return false;"
+         data-ko="직접 문의하기 →" data-en="Contact Us →">직접 문의하기 →</a>
+    </div>
+
+    <div class="divider"></div>
+
+    <div id="contact-form">
+      <div class="section-title" data-ko="직접 문의하기" data-en="Contact Us">직접 문의하기</div>
+      <p class="section-sub" data-ko="FAQ에서 해결이 안 되셨나요?" data-en="Couldn't find your answer in the FAQ?">FAQ에서 해결이 안 되셨나요?</p>
+
+      <div class="form-card">
+        <div id="contact-error" class="error-msg" role="alert"></div>
+
+        <div class="form-group">
+          <label class="form-label" for="contact-name"><span data-ko="이름" data-en="Name">이름</span> <span class="req">*</span></label>
+          <input type="text" id="contact-name" class="form-input"
+                 data-placeholder-ko="성함을 입력해주세요" data-placeholder-en="Enter your name"
+                 placeholder="성함을 입력해주세요" autocomplete="name" maxlength="50">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="contact-email"><span data-ko="이메일" data-en="Email">이메일</span> <span class="req">*</span></label>
+          <input type="email" id="contact-email" class="form-input"
+                 data-placeholder-ko="답변 받으실 이메일" data-placeholder-en="Email for reply"
+                 placeholder="답변 받으실 이메일" autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="contact-type" data-ko="문의 유형" data-en="Inquiry Type">문의 유형</label>
+          <select id="contact-type" class="form-select">
+            <option value="서비스 이용 문의" data-ko="서비스 이용 문의" data-en="Service Inquiry">서비스 이용 문의</option>
+            <option value="사주 계산 오류" data-ko="사주 계산 오류" data-en="BaZi Calculation Error">사주 계산 오류</option>
+            <option value="운세 결과 문의" data-ko="운세 결과 문의" data-en="Fortune Result Inquiry">운세 결과 문의</option>
+            <option value="광고 관련 문의" data-ko="광고 관련 문의" data-en="Advertising Inquiry">광고 관련 문의</option>
+            <option value="개인정보 관련" data-ko="개인정보 관련" data-en="Privacy Related">개인정보 관련</option>
+            <option value="기타 문의" data-ko="기타 문의" data-en="Other">기타 문의</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="contact-message"><span data-ko="문의 내용" data-en="Message">문의 내용</span> <span class="req">*</span></label>
+          <textarea id="contact-message" class="form-textarea"
+                    data-placeholder-ko="문의 내용을 자세히 입력해주세요" data-placeholder-en="Please describe your inquiry in detail"
+                    placeholder="문의 내용을 자세히 입력해주세요"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="agree-row" for="contact-agree">
+            <input type="checkbox" id="contact-agree">
+            <span class="agree-label">
+              <strong data-ko="개인정보 수집 및 이용에 동의합니다." data-en="I agree to the collection and use of personal information.">개인정보 수집 및 이용에 동의합니다.</strong><br>
+              <span data-ko="수집 항목: 이름, 이메일 / 목적: 문의 처리 / 보유: 처리 완료 후 즉시 삭제" data-en="Collected: Name, Email / Purpose: Inquiry processing / Retention: Deleted immediately after processing">수집 항목: 이름, 이메일 / 목적: 문의 처리 / 보유: 처리 완료 후 즉시 삭제</span>
+            </span>
+          </label>
+        </div>
+
+        <button id="contact-btn" class="btn-primary" onclick="submitContact()" data-ko="문의하기" data-en="Submit">문의하기</button>
+      </div>
+    </div>
+
+    <div id="contact-success">
+      <span class="success-icon" aria-hidden="true">✉️</span>
+      <div class="success-title" data-ko="문의가 접수되었습니다!" data-en="Your inquiry has been submitted!">문의가 접수되었습니다!</div>
+      <p class="success-msg">
+        <span data-ko="24시간 이내에 답변 드리겠습니다." data-en="We will respond within 24 hours.">24시간 이내에 답변 드리겠습니다.</span><br>
+        <span data-ko="입력하신 이메일로 확인 메일이 발송됩니다." data-en="A confirmation email will be sent to your email address.">입력하신 이메일로 확인 메일이 발송됩니다.</span>
+      </p>
+      <p class="success-email">직접 연락: a85330549@gmail.com</p>
+      <a href="index.html" class="btn-outline" data-ko="홈으로 돌아가기" data-en="Back to Home">홈으로 돌아가기</a>
+    </div>
+
+    <div class="page-footer">
+      <nav class="footer-links" aria-label="푸터 내비게이션">
+        <a href="privacy.html" data-ko="개인정보처리방침" data-en="Privacy Policy">개인정보처리방침</a>
+        <a href="terms.html" data-ko="이용약관" data-en="Terms of Service">이용약관</a>
+        <a href="notice.html" data-ko="공지사항" data-en="Notice">공지사항</a>
+        <a href="contact.html" data-ko="문의하기" data-en="Contact">문의하기</a>
+      </nav>
+      <p class="footer-copy">© 2026 천기누설. All rights reserved.</p>
+    </div>
+
+  </div>
+
+  <script>
+    (function () {
+      var canvas = document.getElementById('star-canvas');
+      var ctx = canvas.getContext('2d');
+      var stars = [];
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+
+      function initStars() {
+        stars = [];
+        var count = Math.floor((canvas.width * canvas.height) / 8000);
+        for (var i = 0; i < count; i++) {
+          stars.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: Math.random() * 1.2 + 0.3,
+            op: Math.random() * 0.5 + 0.1,
+            speed: Math.random() * 0.008 + 0.003,
+            phase: Math.random() * Math.PI * 2
+          });
+        }
+      }
+
+      var t = 0;
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        t += 0.012;
+        for (var i = 0; i < stars.length; i++) {
+          var s = stars[i];
+          var alpha = s.op * (0.5 + 0.5 * Math.sin(t * s.speed * 60 + s.phase));
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255,255,255,' + alpha + ')';
+          ctx.fill();
+        }
+        requestAnimationFrame(draw);
+      }
+
+      resize();
+      initStars();
+      draw();
+      window.addEventListener('resize', function () { resize(); initStars(); });
+
+      function applyLang(lang) {
+        document.querySelectorAll('[data-ko][data-en]').forEach(function (el) {
+          if (el.children.length === 0) el.textContent = lang === 'en' ? el.dataset.en : el.dataset.ko;
+        });
+        document.querySelectorAll('[data-placeholder-ko][data-placeholder-en]').forEach(function (el) {
+          el.placeholder = lang === 'en' ? el.dataset.placeholderEn : el.dataset.placeholderKo;
+        });
+        var btn = document.getElementById('lang-btn');
+        if (btn) btn.textContent = lang === 'ko' ? '영어' : '한국어';
+        document.title = lang === 'en' ? 'Contact | Cheonkinuseol' : '문의하기 | 천기누설';
+        document.documentElement.lang = lang;
+        localStorage.setItem('chunggi_lang', lang);
+        localStorage.setItem('cheonki_lang', lang);
+        document.body.style.visibility = 'visible';
+      }
+
+      window.toggleLanguage = function () {
+        var lang = localStorage.getItem('chunggi_lang') || 'ko';
+        applyLang(lang === 'ko' ? 'en' : 'ko');
+      };
+
+      document.addEventListener('DOMContentLoaded', function () {
+        var lang = localStorage.getItem('chunggi_lang') || localStorage.getItem('cheonki_lang') || 'ko';
+        applyLang(lang);
+      });
+    })();
+
+    function toggleFaq(btn) {
+      var item = btn.closest('.faq-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function (el) {
+        el.classList.remove('open');
+        el.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    }
+
+    function showError(msg) {
+      var el = document.getElementById('contact-error');
+      el.textContent = msg;
+      el.style.display = 'block';
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      setTimeout(function () { el.style.display = 'none'; }, 4000);
+    }
+
+    function submitContact() {
+      var lang = localStorage.getItem('chunggi_lang') || 'ko';
+      var isEn = lang === 'en';
+      var name    = document.getElementById('contact-name').value.trim();
+      var email   = document.getElementById('contact-email').value.trim();
+      var type    = document.getElementById('contact-type').value;
+      var message = document.getElementById('contact-message').value.trim();
+      var agree   = document.getElementById('contact-agree').checked;
+
+      if (!name) {
+        showError(isEn ? 'Please enter your name.' : '이름을 입력해주세요.'); return;
+      }
+      if (!email || !email.includes('@') || !email.includes('.')) {
+        showError(isEn ? 'Please enter a valid email address.' : '올바른 이메일 주소를 입력해주세요.'); return;
+      }
+      if (!message) {
+        showError(isEn ? 'Please enter your inquiry.' : '문의 내용을 입력해주세요.'); return;
+      }
+      if (!agree) {
+        showError(isEn ? 'Please agree to the privacy policy.' : '개인정보 수집 및 이용에 동의해주세요.'); return;
+      }
+
+      var btn = document.getElementById('contact-btn');
+      btn.textContent = isEn ? 'Sending...' : '전송 중...';
+      btn.disabled = true;
+
+      emailjs.send(
+        "YOUR_SERVICE_ID",
+        "YOUR_TEMPLATE_ID",
+        {
+          from_name:    name,
+          from_email:   email,
+          inquiry_type: type,
+          message:      message,
+          to_email:     "a85330549@gmail.com",
+          reply_to:     email
+        }
+      ).then(function () {
+        document.getElementById('contact-form').style.display = 'none';
+        document.getElementById('contact-success').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }).catch(function (error) {
+        var curLang = localStorage.getItem('chunggi_lang') || 'ko';
+        showError(curLang === 'en'
+          ? 'Failed to send. Please try again or email a85330549@gmail.com directly.'
+          : '전송에 실패했습니다. 잠시 후 다시 시도하거나 a85330549@gmail.com 으로 직접 문의해주세요.');
+        btn.textContent = curLang === 'en' ? btn.dataset.en : btn.dataset.ko;
+        btn.disabled = false;
+        console.error('EmailJS error:', error);
+      });
+    }
+  </script>
+</body>
+</html>

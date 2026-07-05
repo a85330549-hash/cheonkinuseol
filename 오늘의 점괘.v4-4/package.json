@@ -1,0 +1,9 @@
+{
+  "name": "chunggi-saju",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@astrodraw/astrochart": "^3.0.2",
+    "@fullstackfamily/manseryeok": "^1.0.8"
+  }
+}
