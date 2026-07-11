@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- 기본 SEO -->
+    <title>천기누설 | 오늘의 운세 · 사주 · 타로 · 별자리 무료 점괘</title>
+    <script>(function(){var l=localStorage.getItem('chunggi_lang')||localStorage.getItem('cheonki_lang')||'ko';document.documentElement.lang=l;document.documentElement.setAttribute('data-lang',l);})();</script>
+    <style>body{visibility:hidden;}</style>
+    <meta name="description" content="천기누설에서 오늘의 운세를 무료로 확인하세요. 사주팔자, 타로카드, 별자리 운세를 한 곳에서! 매일 업데이트되는 나만의 점괘.">
+    <meta name="keywords" content="오늘의운세, 무료운세, 사주, 타로, 별자리, 사주팔자, 운세, 점괘, 신년운세, 월간운세, 연애운, 재물운">
+    <meta name="author" content="천기누설">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / 카카오톡·SNS 공유 -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="천기누설">
+    <meta property="og:title" content="천기누설 | 오늘의 운세 무료">
+    <meta property="og:description" content="사주·타로·별자리 운세를 한 곳에서! 매일 업데이트되는 무료 오늘의 점괘">
+    <meta property="og:url" content="https://product-builder-test-cheonki.pages.dev">
+    <meta property="og:image" content="https://product-builder-test-cheonki.pages.dev/img/%EB%A9%94%EC%9D%B8%EB%B2%A0%EB%84%88.png">
+    <meta property="og:image:width" content="800">
+    <meta property="og:image:height" content="400">
+    <meta property="og:image:alt" content="천기누설 - 오늘의 운세 무료 서비스">
+    <meta property="og:locale" content="ko_KR">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="천기누설 | 오늘의 운세 무료">
+    <meta name="twitter:description" content="사주·타로·별자리 운세를 한 곳에서! 매일 업데이트되는 무료 오늘의 점괘">
+    <meta name="twitter:image" content="https://product-builder-test-cheonki.pages.dev/img/%EB%A9%94%EC%9D%B8%EB%B2%A0%EB%84%88.png">
+    <meta name="twitter:image:alt" content="천기누설 - 오늘의 운세 무료 서비스">
+
+    <!-- 언어 -->
+    <link rel="alternate" hreflang="ko" href="https://product-builder-test-cheonki.pages.dev">
+    <link rel="alternate" hreflang="en" href="https://product-builder-test-cheonki.pages.dev?lang=en">
+
+    <!-- 구조화 데이터 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "천기누설",
+      "alternateName": "Cheonkinuseol",
+      "url": "https://product-builder-test-cheonki.pages.dev",
+      "description": "사주·타로·별자리 운세를 한 곳에서 무료로 확인하는 서비스",
+      "inLanguage": ["ko", "en"],
+      "publisher": {
+        "@type": "Organization",
+        "name": "천기누설",
+        "email": "a85330549@gmail.com"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://product-builder-test-cheonki.pages.dev/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- 성능 최적화 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NC3CB4QTRL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NC3CB4QTRL');
+    </script>
+
+    <!-- Amplitude GA 연동 -->
+    <script type="text/javascript">
+      !function(){"use strict";!function(e,t){var r=e.amplitude||{_q:[],_iq:{}};if(r.invoked)e.console&&console.error&&console.error("Amplitude snippet has been loaded.");amplitude.init('ee18b57d19c1f37af1e1f895ced12b7b');}(window,document)}();
+    </script>
+
+    <!-- AdSense -->
+    <script async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8164358198547815"
+      crossorigin="anonymous">
+    </script>
+
+    <link rel="icon" href="img/메인베너.png">
+
+    <!-- CSS 파일 연결 -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Firebase SDK (compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+    <!-- Firebase 설정 -->
+    <script src="firebase-config.js"></script>
+
+    <!-- 카카오 로그인 SDK -->
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js" crossorigin="anonymous"></script>
+
+    <!-- Amplitude init -->
+    <script type="text/javascript">
+      !function(){"use strict";!function(e,t){var r=e.amplitude||{_q:[],_iq:{}};if(r.invoked)e.console&&console.error&&console.error("Amplitude snippet has been loaded.");else{var n=function(e,t){e.prototype[t]=function(){return this._q.push({name:t,args:Array.prototype.slice.call(arguments,0)}),this}},s=function(e,t,r){return function(n){e._q.push({name:t,args:Array.prototype.slice.call(r,0),resolve:n})}},o=function(e,t,r){e[t]=function(){if(r)return{promise:new Promise(s(e,t,Array.prototype.slice.call(arguments)))}}},i=function(e){for(var t=0;t<m.length;t++)o(e,m[t],!1);for(var r=0;r<y.length;r++)o(e,y[r],!0)};r.invoked=!0;var a=t.createElement("script");a.type="text/javascript",a.crossOrigin="anonymous",a.src="https://cdn.amplitude.com/libs/plugin-ga-events-forwarder-browser-0.4.2-min.js.gz",a.onload=function(){e.gaEventsForwarder&&e.gaEventsForwarder.plugin&&e.amplitude.add(e.gaEventsForwarder.plugin())};var c=t.createElement("script");c.type="text/javascript",c.integrity="sha384-pY2pkwHaLM/6UIseFHVU3hOKr6oAvhLcdYkoRZyaMDWLjpM6B7nTxtOdE823WAOQ",c.crossOrigin="anonymous",c.async=!0,c.src="https://cdn.amplitude.com/libs/analytics-browser-2.11.0-min.js.gz",c.onload=function(){e.amplitude.runQueuedFunctions||console.log("[Amplitude] Error: could not load SDK")};var u=t.getElementsByTagName("script")[0];u.parentNode.insertBefore(a,u),u.parentNode.insertBefore(c,u);for(var p=function(){return this._q=[],this},d=["add","append","clearAll","prepend","set","setOnce","unset","preInsert","postInsert","remove","getUserProperties"],l=0;l<d.length;l++)n(p,d[l]);r.Identify=p;for(var g=function(){return this._q=[],this},v=["getEventProperties","setProductId","setQuantity","setPrice","setRevenue","setRevenueType","setEventProperties"],f=0;f<v.length;f++)n(g,v[f]);r.Revenue=g;var m=["getDeviceId","setDeviceId","getSessionId","setSessionId","getUserId","setUserId","setOptOut","setTransport","reset","extendSession"],y=["init","add","remove","track","logEvent","identify","groupIdentify","setGroup","revenue","flush"];i(r),r.createInstance=function(e){return r._iq[e]={_q:[]},i(r._iq[e]),r._iq[e]},e.amplitude=r}}(window,document)}();
+
+      amplitude.init('ee18b57d19c1f37af1e1f895ced12b7b');
+    </script>
+
+    <!-- Amplitude -->
+    <script src="https://cdn.amplitude.com/script/ee18b57d19c1f37af1e1f895ced12b7b.js"></script>
+    <script>
+      window.amplitude.add(
+        window.sessionReplay.plugin({ sampleRate: 1 })
+      );
+      window.amplitude.init('ee18b57d19c1f37af1e1f895ced12b7b', {
+        fetchRemoteConfig: true,
+        autocapture: true
+      });
+    </script>
+  </head>
+  <body>
+    <!-- 카카오톡 인앱 브라우저 감지 팝업 -->
+    <script>
+      if (/KAKAOTALK/i.test(navigator.userAgent)) {
+        document.addEventListener('DOMContentLoaded', function () {
+          var popup = document.createElement('div');
+          popup.innerHTML = `
+            <div id="kakao-popup-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;box-sizing:border-box;">
+              <div style="background:#1e0d35;border:1px solid rgba(197,160,89,0.5);border-radius:16px;padding:32px 24px;max-width:320px;width:100%;text-align:center;font-family:sans-serif;box-shadow:0 0 40px rgba(197,160,89,0.2);">
+                <div style="font-size:44px;margin-bottom:12px">🌐</div>
+                <h2 style="color:#c5a059;font-size:20px;margin:0 0 12px 0">크롬 브라우저로 열어주세요</h2>
+                <p style="color:#bbb;font-size:14px;line-height:1.7;margin:0 0 24px 0">카카오톡 내부 브라우저에서는<br>구글 로그인이 지원되지 않습니다.</p>
+                <div style="background:rgba(197,160,89,0.08);border:1px solid rgba(197,160,89,0.2);border-radius:10px;padding:14px;margin-bottom:12px;">
+                  <p style="color:#c5a059;margin:0 0 6px 0;font-size:13px;font-weight:bold">📱 Android</p>
+                  <p style="color:#ccc;margin:0;font-size:13px">우측 상단 <b style="color:#fff">⋮</b> → <b style="color:#fff">다른 브라우저로 열기</b></p>
+                </div>
+                <div style="background:rgba(197,160,89,0.08);border:1px solid rgba(197,160,89,0.2);border-radius:10px;padding:14px;margin-bottom:24px;">
+                  <p style="color:#c5a059;margin:0 0 6px 0;font-size:13px;font-weight:bold">🍎 iPhone</p>
+                  <p style="color:#ccc;margin:0;font-size:13px">우측 하단 공유 버튼 → <b style="color:#fff">Safari로 열기</b></p>
+                </div>
+                <button onclick="document.getElementById('kakao-popup-overlay').style.display='none'" style="background:rgba(197,160,89,0.15);border:1px solid rgba(197,160,89,0.4);color:#c5a059;padding:10px 28px;border-radius:8px;font-size:14px;cursor:pointer;">닫기</button>
+              </div>
+            </div>
+          `;
+          document.body.appendChild(popup);
+        });
+      }
+    </script>
+
+    <div class="mystic-bg"></div>
+
+    <!-- 공지사항 배너 -->
+    <div id="notice-banner" style="display:none;" role="alert">
+      <span class="notice-banner-badge">📢 공지</span>
+      <span class="notice-banner-text" id="notice-banner-text"></span>
+      <button class="notice-banner-close" onclick="dismissNoticeBanner()" aria-label="닫기">✕</button>
+    </div>
+
+    <!-- 상단 네비게이션 -->
+    <nav class="top-nav">
+      <div class="nav-container">
+        <div class="logo" onclick="showPage('home')">천기누설</div>
+        <ul class="nav-menu">
+          <li onclick="window.amplitude.track('메뉴 클릭', {menu:'홈'}); showPage('home')" id="menu-home" class="active" data-ko="홈" data-en="Home">홈</li>
+          <li onclick="window.amplitude.track('메뉴 클릭', {menu:'신년운세'}); showPage('newyear')" id="menu-newyear" data-ko="신년운세" data-en="New Year">신년운세</li>
+          <li onclick="window.amplitude.track('메뉴 클릭', {menu:'월간운세'}); showPage('monthly')" id="menu-monthly" data-ko="월간운세" data-en="Monthly">월간운세</li>
+          <li onclick="window.amplitude.track('메뉴 클릭', {menu:'연애/궁합'}); showPage('love')" id="menu-love" data-ko="연애/궁합" data-en="Love/Match">연애/궁합</li>
+          <li onclick="window.amplitude.track('메뉴 클릭', {menu:'연애고민'}); showPage('worry')" id="menu-worry" data-ko="연애고민" data-en="Love Trouble">연애고민</li>
+          <li onclick="window.amplitude.track('메뉴 클릭', {menu:'만남'}); showPage('meeting')" id="menu-meeting" data-ko="만남" data-en="Meeting">만남</li>
+          <li onclick="window.amplitude.track('메뉴 클릭', {menu:'십년후운세'}); showPage('tenyear')" id="menu-tenyear" data-ko="십년후운세" data-en="10 Years">십년후운세</li>
+          <li onclick="window.amplitude.track('메뉴 클릭', {menu:'문의하기'}); location.href='contact.html'" id="menu-contact" data-ko="문의하기" data-en="Contact">문의하기</li>
+        </ul>
+        <div class="nav-auth">
+          <div class="nav-lang" style="margin-right: 10px;">
+            <button onclick="toggleLanguage()" class="lang-btn" id="lang-btn">English</button>
+          </div>
+          <div id="nav-login-btn" class="nav-login-btn" onclick="showAuthModal()">로그인</div>
+          <div id="nav-user-info" class="nav-user-info" style="display:none;">
+            <span class="nav-username" id="nav-username">사용자님</span>
+            <button class="nav-logout-btn" onclick="handleLogout()">로그아웃</button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="box">
+      <div class="header-section">
+        <span class="sub-title" id="page-subtitle">사주한잔(四柱一盞)</span>
+        <h1 id="page-title">천기누설(오늘의 점괘)</h1>
+        <div class="title-underline"></div>
+      </div>
+
+      <!-- 메인 배너 이미지 추가 (이미지만 표시) -->
+      <div class="main-banner">
+        <img src="img/메인베너.png" alt="메인 배너" loading="lazy">
+      </div>
+
+      <!-- 서비스 소개 카드 2종 -->
+      <div class="service-cards" id="service-cards">
+        <div class="service-card" onclick="goToService('astrology')" style="cursor:pointer;">
+          <div class="sc-icon">⭐</div>
+          <div class="sc-title" data-ko="점성술" data-en="Astrology">점성술</div>
+          <div class="sc-desc" data-ko="별자리로 오늘의 운세를 확인하세요" data-en="Check your fortune with Astrology">별자리로 오늘의 운세를 확인하세요</div>
+        </div>
+        <div class="service-card" onclick="goToService('tarot')" style="cursor:pointer;">
+          <div class="sc-icon">🃏</div>
+          <div class="sc-title" data-ko="타로" data-en="Tarot">타로</div>
+          <div class="sc-desc" data-ko="타로카드로 오늘의 운명을 점쳐보세요" data-en="Read your fortune with Tarot cards">타로카드로 오늘의 운명을 점쳐보세요</div>
+        </div>
+      </div>
+
+      <!-- 만남 페이지: 운세 유형 선택 탭 -->      <div id="fortune-type-selector" style="display: none; margin-bottom: 25px;">
+        <div class="fortune-type-tabs">
+          <button class="fortune-type-tab active" onclick="selectMeetingType('saju')" id="type-saju">🔮 사주</button>
+          <button class="fortune-type-tab" onclick="window.amplitude.track('별자리 클릭'); window.amplitude.track('Zodiac Click'); selectMeetingType('astrology')" id="type-astrology">⭐ 점성술</button>
+          <button class="fortune-type-tab" onclick="window.amplitude.track('타로 클릭'); window.amplitude.track('Tarot Click'); selectMeetingType('tarot')" id="type-tarot">🃏 타로</button>
+        </div>
+      </div>
+
+      <!-- 공통 입력 폼 영역 -->
+      <div class="form-container" id="main-form">
+        <div class="input-row">
+          <label for="userName" id="lbl-name">이름</label>
+          <input type="text" id="userName" placeholder="성함을 입력하세요" autocomplete="off" />
+        </div>
+
+        <div class="input-row gender-row">
+          <label id="lbl-gender">성별</label>
+          <div class="gender-options">
+            <input type="radio" name="gender" value="male" id="male" checked><label for="male">남성</label>
+            <input type="radio" name="gender" value="female" id="female"><label for="female">여성</label>
+          </div>
+        </div>
+        
+        <div class="input-row date-row">
+          <label id="lbl-birth">생년월일</label>
+          <div class="birth-inputs">
+            <select id="birthYear"></select>
+            <select id="birthMonth"></select>
+            <select id="birthDay"></select>
+          </div>
+        </div>
+
+        <div class="input-row calendar-row">
+          <label id="lbl-calendar">달력</label>
+          <div class="calendar-options">
+            <input type="radio" name="calendar" value="solar" id="solar" checked><label for="solar">양력</label>
+            <input type="radio" name="calendar" value="lunar" id="lunar"><label for="lunar">음력</label>
+            <input type="radio" name="calendar" value="leap" id="leap"><label for="leap">윤달</label>
+          </div>
+        </div>
+
+        <div class="input-row time-row">
+          <label for="birthTime" id="lbl-time">태어난 시간</label>
+          <select id="birthTime">
+            <option value="unknown">모름</option>
+            <option value="0">00시 (子시)</option>
+            <option value="1">01시</option>
+            <option value="2">02시 (丑시)</option>
+            <option value="3">03시</option>
+            <option value="4">04시 (寅시)</option>
+            <option value="5">05시</option>
+            <option value="6">06시 (卯시)</option>
+            <option value="7">07시</option>
+            <option value="8">08시 (辰시)</option>
+            <option value="9">09시</option>
+            <option value="10">10시 (巳시)</option>
+            <option value="11">11시</option>
+            <option value="12">12시 (午시)</option>
+            <option value="13">13시</option>
+            <option value="14">14시 (未시)</option>
+            <option value="15">15시</option>
+            <option value="16">16시 (申시)</option>
+            <option value="17">17시</option>
+            <option value="18">18시 (酉시)</option>
+            <option value="19">19시</option>
+            <option value="20">20시 (戌시)</option>
+            <option value="21">21시</option>
+            <option value="22">22시 (亥시)</option>
+            <option value="23">23시</option>
+          </select>
+        </div>
+        
+        <!-- 연애/궁합 전용 상대방 입력 폼 (기본 숨김) -->
+        <div id="partner-form" style="display: none; margin-top: 20px; border-top: 1px dashed rgba(197, 160, 89, 0.3); padding-top: 20px;">
+          <span class="sub-title" style="margin-bottom: 15px;">상대방 정보</span>
+          <div class="input-row">
+            <label for="partnerName" id="lbl-partner-name">이름</label>
+            <input type="text" id="partnerName" placeholder="상대방 성함을 입력하세요" autocomplete="off" />
+          </div>
+
+          <div class="input-row gender-row">
+            <label id="lbl-partner-gender">상대 성별</label>
+            <div class="gender-options">
+              <input type="radio" name="partnerGender" value="male" id="p-male"><label for="p-male">남성</label>
+              <input type="radio" name="partnerGender" value="female" id="p-female" checked><label for="p-female">여성</label>
+            </div>
+          </div>
+          
+          <div class="input-row date-row">
+            <label id="lbl-partner-birth">상대 생일</label>
+            <div class="birth-inputs">
+              <select id="partnerYear"></select>
+              <select id="partnerMonth"></select>
+              <select id="partnerDay"></select>
+            </div>
+          </div>
+
+          <div class="input-row calendar-row">
+            <label id="lbl-partner-calendar">상대 달력</label>
+            <div class="calendar-options">
+              <input type="radio" name="partnerCalendar" value="solar" id="p-solar" checked><label for="p-solar">양력</label>
+              <input type="radio" name="partnerCalendar" value="lunar" id="p-lunar"><label for="p-lunar">음력</label>
+              <input type="radio" name="partnerCalendar" value="leap" id="p-leap"><label for="p-leap">윤달</label>
+            </div>
+          </div>
+
+          <div class="input-row time-row">
+            <label for="partnerTime" id="lbl-partner-time">상대 시간</label>
+            <select id="partnerTime">
+              <option value="unknown">모름</option>
+              <option value="0">00시 (子시)</option>
+              <option value="1">01시</option>
+              <option value="2">02시 (丑시)</option>
+              <option value="3">03시</option>
+              <option value="4">04시 (寅시)</option>
+              <option value="5">05시</option>
+              <option value="6">06시 (卯시)</option>
+              <option value="7">07시</option>
+              <option value="8">08시 (辰시)</option>
+              <option value="9">09시</option>
+              <option value="10">10시 (巳시)</option>
+              <option value="11">11시</option>
+              <option value="12">12시 (午시)</option>
+              <option value="13">13시</option>
+              <option value="14">14시 (未시)</option>
+              <option value="15">15시</option>
+              <option value="16">16시 (申시)</option>
+              <option value="17">17시</option>
+              <option value="18">18시 (酉시)</option>
+              <option value="19">19시</option>
+              <option value="20">20시 (戌시)</option>
+              <option value="21">21시</option>
+              <option value="22">22시 (亥시)</option>
+              <option value="23">23시</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <button onclick="window.amplitude.track('사주 확인 클릭'); window.amplitude.track('Check Fortune'); getFortune()" class="main-btn" id="submit-btn">운세 확인하기</button>
+      
+      <div class="loading" id="loading">🔮 천기를 읽는 중...</div>
+
+      <!-- 타로 카드 선택 영역 -->
+      <div id="tarot-cards-area" style="display: none; margin-top: 30px;"></div>
+
+      <!-- 결과 탭 메뉴 (결과 노출 시 표시) -->
+      <div class="result-tabs" id="result-tabs" style="display: none;">
+        <div class="tab-item active" onclick="switchTab('total', this)">총운</div>
+        <div class="tab-item" onclick="switchTab('wealth', this)">재물</div>
+        <div class="tab-item" onclick="switchTab('love', this)">애정</div>
+        <div class="tab-item" onclick="switchTab('career', this)">직장</div>
+        <div class="tab-item" onclick="switchTab('health', this)">건강</div>
+      </div>
+
+      <div class="result" id="result"></div>
+    </div>
+
+    <!-- 소개 / FAQ / 가이드 섹션 -->
+    <div class="content-sections">
+      <section id="about" class="content-section">
+        <h2 data-ko="천기누설이란?" data-en="What is Cheonkinuseol?">천기누설이란?</h2>
+        <p data-ko="천기누설은 동양 철학의 정수인 사주팔자(四柱八字)를 기반으로 오늘의 운세를 과학적으로 분석하는 서비스입니다." data-en="Cheonkinuseol is a service that scientifically analyzes today's fortune based on BaZi (四柱八字), the essence of Eastern philosophy.">천기누설은 동양 철학의 정수인 사주팔자(四柱八字)를 기반으로 오늘의 운세를 과학적으로 분석하는 서비스입니다.</p>
+        <p data-ko="수천 년의 역사를 가진 명리학(命理學) 이론을 바탕으로 개인의 생년월일시를 분석하여 정확한 운세를 제공합니다." data-en="Based on the theory of Myeongrihak (命理學) with thousands of years of history, we analyze your birth date and time to provide accurate fortune readings.">수천 년의 역사를 가진 명리학(命理學) 이론을 바탕으로 개인의 생년월일시를 분석하여 정확한 운세를 제공합니다.</p>
+      </section>
+
+      <section id="faq" class="content-section">
+        <h2 data-ko="자주 묻는 질문" data-en="Frequently Asked Questions">자주 묻는 질문</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <p class="faq-q" data-ko="Q: 천기누설은 무료인가요?" data-en="Q: Is Cheonkinuseol free?">Q: 천기누설은 무료인가요?</p>
+            <p class="faq-a" data-ko="A: 네, 모든 서비스는 완전 무료입니다." data-en="A: Yes, all services are completely free. Ads may be displayed, but the service is free to use.">A: 네, 모든 서비스는 완전 무료입니다.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q" data-ko="Q: 사주 계산은 어떻게 하나요?" data-en="Q: Is the BaZi calculation accurate?">Q: 사주 계산은 어떻게 하나요?</p>
+            <p class="faq-a" data-ko="A: 생년월일시를 입력하면 만세력 기반으로 자동 계산됩니다." data-en="A: It is accurately calculated based on the traditional Korean almanac. The more precisely you enter your birth date and time, the more accurate the results.">A: 생년월일시를 입력하면 만세력 기반으로 자동 계산됩니다.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q" data-ko="Q: 얼마나 자주 업데이트되나요?" data-en="Q: Does the fortune change daily?">Q: 얼마나 자주 업데이트되나요?</p>
+            <p class="faq-a" data-ko="A: 매일 자동으로 업데이트됩니다." data-en="A: Yes, today's fortune is automatically updated every midnight.">A: 매일 자동으로 업데이트됩니다.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q" data-ko="Q: 개인정보는 안전한가요?" data-en="Q: Is my personal information stored?">Q: 개인정보는 안전한가요?</p>
+            <p class="faq-a" data-ko="A: 입력한 정보는 서버에 저장되지 않습니다." data-en="A: Personal information such as your birth date is not stored on our servers. It is only used within your browser session.">A: 입력한 정보는 서버에 저장되지 않습니다.</p>
+          </div>
+        </div>
+        <div style="margin-top: 20px;">
+          <a href="contact.html" data-ko="직접 문의하기 →" data-en="Contact Us →" style="display:inline-flex;align-items:center;gap:6px;padding:11px 22px;border:1px solid rgba(197,160,89,0.3);border-radius:10px;color:#c5a059;font-size:0.88rem;font-weight:700;font-family:inherit;text-decoration:none;background:rgba(197,160,89,0.08);transition:all 0.25s;" onmouseover="this.style.background='rgba(197,160,89,0.18)';this.style.borderColor='#c5a059'" onmouseout="this.style.background='rgba(197,160,89,0.08)';this.style.borderColor='rgba(197,160,89,0.3)'">직접 문의하기 →</a>
+        </div>
+      </section>
+
+      <section id="guide" class="content-section">
+        <h2 data-ko="운세 보는 방법" data-en="How to Read Your Fortune">운세 보는 방법</h2>
+        <div class="guide-item">
+          <h3 data-ko="사주(四柱) 운세" data-en="BaZi (四柱) Fortune">사주(四柱) 운세</h3>
+          <p data-ko="태어난 연·월·일·시의 네 기둥으로 운명을 분석합니다. 정확한 생시를 입력할수록 더 정밀한 결과를 얻을 수 있습니다." data-en="Analyzes destiny through the four pillars of birth year, month, day, and hour. The more accurately you input your birth time, the more precise the results.">태어난 연·월·일·시의 네 기둥으로 운명을 분석합니다. 정확한 생시를 입력할수록 더 정밀한 결과를 얻을 수 있습니다.</p>
+        </div>
+        <div class="guide-item">
+          <h3 data-ko="타로 운세" data-en="Tarot Fortune">타로 운세</h3>
+          <p data-ko="78장의 타로카드 중 오늘의 카드를 뽑아 현재 상황과 미래를 예측합니다." data-en="Draw today's card from 78 tarot cards to predict your current situation and future.">78장의 타로카드 중 오늘의 카드를 뽑아 현재 상황과 미래를 예측합니다.</p>
+        </div>
+        <div class="guide-item">
+          <h3 data-ko="별자리 운세" data-en="Zodiac Fortune">별자리 운세</h3>
+          <p data-ko="12개의 별자리별로 오늘의 운세와 주간·월간 운세를 제공합니다." data-en="Provides daily, weekly, and monthly fortune readings for each of the 12 zodiac signs.">12개의 별자리별로 오늘의 운세와 주간·월간 운세를 제공합니다.</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- 푸터 -->
+    <footer class="site-footer">
+      <nav class="footer-nav" aria-label="푸터 내비게이션">
+        <a href="privacy.html" data-ko="개인정보처리방침" data-en="Privacy Policy">개인정보처리방침</a>
+        <a href="terms.html" data-ko="이용약관" data-en="Terms of Service">이용약관</a>
+        <a href="notice.html" data-ko="공지사항" data-en="Notice">공지사항</a>
+        <a href="contact.html" data-ko="문의하기" data-en="Contact">문의하기</a>
+      </nav>
+      <p class="footer-copy" data-ko="© 2026 천기누설. All rights reserved." data-en="© 2026 Cheonkinuseol. All rights reserved.">© 2026 천기누설. All rights reserved.</p>
+      <p class="footer-info" data-ko="운영자: 류재희 | 이메일: a85330549@gmail.com" data-en="Operator: Jaehee Ryu | Email: a85330549@gmail.com">운영자: 류재희 | 이메일: a85330549@gmail.com</p>
+    </footer>
+
+    <!-- 로그인/회원가입 모달 -->
+    <div id="auth-overlay" class="auth-overlay" style="display:none;">
+      <div class="auth-modal">
+        <div class="auth-logo">🔮 천기누설</div>
+        <p class="auth-subtitle">천기(天機)를 살피려면 먼저 자신을 알려주세요</p>
+
+        <div class="auth-tabs">
+          <button class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">로그인</button>
+          <button class="auth-tab" id="tab-register" onclick="switchAuthTab('register')">회원가입</button>
+        </div>
+
+        <!-- 로그인 폼 -->
+        <div id="auth-login-form">
+          <div class="auth-input-group">
+            <label id="auth-lbl-email-login">이메일</label>
+            <input type="email" id="login-email" placeholder="이메일을 입력하세요" autocomplete="email">
+          </div>
+          <div class="auth-input-group">
+            <label id="auth-lbl-password-login">비밀번호</label>
+            <div class="pw-wrapper">
+              <input type="password" id="login-password" placeholder="비밀번호를 입력하세요" autocomplete="current-password" onkeydown="if(event.key==='Enter') handleLogin()">
+              <button type="button" class="pw-toggle-btn" onclick="togglePassword('login-password', this)" aria-label="비밀번호 보기">👁️</button>
+            </div>
+          </div>
+          <div class="auth-remember-row">
+            <div class="auth-remember">
+              <input type="checkbox" id="remember-me">
+              <label for="remember-me" id="auth-lbl-remember">로그인 상태 유지</label>
+            </div>
+            <a href="#" class="forgot-pw" id="forgot-pw" onclick="handlePasswordReset()">비밀번호를 잊으셨나요?</a>
+          </div>
+          <div id="login-error" class="auth-error" style="display:none;"></div>
+          <button class="auth-btn" onclick="handleLogin()">로그인</button>
+
+          <div class="auth-divider"><span>또는 구글 계정으로</span></div>
+
+          <button class="auth-social-btn auth-google" onclick="handleGoogleLogin()">
+            <svg width="18" height="18" viewBox="0 0 18 18"><path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4"/><path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853"/><path d="M3.964 10.707A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.707V4.961H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.039l3.007-2.332z" fill="#FBBC05"/><path d="M9 3.576c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.961L3.964 7.293C4.672 5.163 6.656 3.576 9 3.576z" fill="#EA4335"/></svg>
+            구글로 로그인
+          </button>
+
+          <button class="auth-social-btn auth-kakao" onclick="handleKakaoLogin()">
+            <svg width="18" height="18" viewBox="0 0 18 18"><path d="M9 1.5C4.31 1.5.5 4.44.5 8.06c0 2.31 1.55 4.34 3.89 5.5-.17.63-.62 2.28-.71 2.63-.11.44.16.43.34.31.14-.09 2.27-1.54 3.19-2.17.58.08 1.17.13 1.79.13 4.69 0 8.5-2.94 8.5-6.56S13.69 1.5 9 1.5z" fill="#191919"/></svg>
+            카카오로 로그인
+          </button>
+        </div>
+
+        <!-- 회원가입 폼 -->
+        <div id="auth-register-form" style="display:none;">
+          <div class="auth-input-group">
+            <label><span id="auth-lbl-name">이름</span> <span class="auth-required">*</span></label>
+            <input type="text" id="register-name" placeholder="이름을 입력하세요" autocomplete="name">
+          </div>
+          <div class="auth-input-group">
+            <label><span id="auth-lbl-email-register">이메일</span> <span class="auth-required">*</span></label>
+            <input type="email" id="register-email" placeholder="이메일을 입력하세요" autocomplete="email">
+          </div>
+          <div class="auth-input-group">
+            <label><span id="auth-lbl-pw-register">비밀번호</span> <span class="auth-required">*</span></label>
+            <div class="pw-wrapper">
+              <input type="password" id="register-password" placeholder="6자 이상 입력하세요" autocomplete="new-password">
+              <button type="button" class="pw-toggle-btn" onclick="togglePassword('register-password', this)" aria-label="비밀번호 보기">👁️</button>
+            </div>
+          </div>
+          <div class="auth-input-group">
+            <label><span id="auth-lbl-pw-confirm">비밀번호 확인</span> <span class="auth-required">*</span></label>
+            <div class="pw-wrapper">
+              <input type="password" id="register-password2" placeholder="비밀번호를 다시 입력하세요" autocomplete="new-password" onkeydown="if(event.key==='Enter') handleRegister()">
+              <button type="button" class="pw-toggle-btn" onclick="togglePassword('register-password2', this)" aria-label="비밀번호 보기">👁️</button>
+            </div>
+          </div>
+          <div id="register-error" class="auth-error" style="display:none;"></div>
+          <button class="auth-btn" onclick="handleRegister()">회원가입 완료</button>
+        </div>
+
+        <div class="auth-skip">
+          <a href="#" onclick="skipAuth(event)">비회원으로 계속하기 →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 비밀번호 재설정 모달 -->
+    <div id="pw-reset-overlay" class="auth-overlay" style="display:none;">
+      <div class="auth-modal" style="max-width:400px;">
+        <!-- 초기 입력 화면 -->
+        <div id="pw-reset-form-view">
+          <div class="auth-logo" id="pw-reset-logo">🔑 비밀번호 재설정</div>
+          <p class="auth-subtitle" id="pw-reset-subtitle">가입하신 이메일로 재설정 링크를 보내드립니다</p>
+          <div class="auth-input-group">
+            <label id="pw-reset-email-label">이메일</label>
+            <input type="email" id="pw-reset-email" placeholder="가입한 이메일을 입력하세요" autocomplete="email"
+              onkeydown="if(event.key==='Enter') submitPasswordReset()">
+          </div>
+          <div id="pw-reset-error" class="auth-error" style="display:none;"></div>
+          <button class="auth-btn" id="pw-reset-submit-btn" onclick="submitPasswordReset()" style="margin-top:8px;">재설정 메일 보내기</button>
+          <div class="auth-skip" style="margin-top:16px;">
+            <a href="#" onclick="hidePasswordResetModal(event)" id="pw-reset-back">← 로그인으로 돌아가기</a>
+          </div>
+        </div>
+        <!-- 발송 완료 화면 -->
+        <div id="pw-reset-success-view" style="display:none; text-align:center;">
+          <div style="font-size:3rem; margin-bottom:16px;">📬</div>
+          <div class="auth-logo" style="font-size:1.2rem; margin-bottom:10px;" id="pw-reset-success-title">메일을 발송했습니다</div>
+          <p class="auth-subtitle" id="pw-reset-success-msg">입력한 이메일의 받은편지함을 확인해주세요.<br>재설정 링크를 클릭하면 새 비밀번호를 설정할 수 있습니다.</p>
+          <button class="auth-btn" onclick="hidePasswordResetModal()" style="margin-top:8px;" id="pw-reset-close-btn">확인</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 외부 라이브러리 및 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <!-- 사주 팔자 계산 라이브러리 (6tail/lunar-javascript) -->
+    <script src="https://cdn.jsdelivr.net/npm/lunar-javascript/lunar.js"></script>
+    <script src="manseryeok.bundle.js"></script>
+    <script src="astrochart.js"></script>
+    <script src="script.js"></script>
+    <script>
+      window.amplitude.track('Page View', { page: window.location.pathname });
+      window.addEventListener('beforeunload', function() {
+        window.amplitude.track('페이지 이탈');
+      });
+    </script>
+
+    <!-- ================================================
+         오늘의 점괘 모달 (홈 서비스 카드 전용)
+         ================================================ -->
+    <div id="tdm-overlay" onclick="closeTodayModal()"></div>
+    <div id="tdm-modal" role="dialog" aria-modal="true">
+
+      <!-- 헤더 -->
+      <div class="tdm-header">
+        <div class="tdm-header-left">
+          <div class="tdm-icon-title">
+            <span id="tdm-icon">🔮</span>
+            <span id="tdm-title">오늘의 사주 운세</span>
+          </div>
+          <div class="tdm-date" id="tdm-date"></div>
+        </div>
+        <button class="tdm-close" onclick="closeTodayModal()" aria-label="닫기">✕</button>
+      </div>
+
+      <!-- 폼 영역 -->
+      <div id="tdm-form-wrap">
+
+        <!-- 점성술 폼 -->
+        <div id="tdm-astro-form" style="display:none">
+          <div class="tdm-field">
+            <label class="tdm-label" data-ko="태어난 월·일" data-en="Birth Month & Day">태어난 월·일</label>
+            <div class="tdm-row">
+              <select id="tdm-astro-month" class="tdm-select"></select>
+              <select id="tdm-astro-day" class="tdm-select"></select>
+            </div>
+          </div>
+          <p class="tdm-hint" data-ko="월·일로 별자리를 자동 계산합니다" data-en="Zodiac is auto-calculated from month & day">월·일로 별자리를 자동 계산합니다</p>
+        </div>
+
+        <!-- 타로 폼 -->
+        <div id="tdm-tarot-form" style="display:none">
+          <p class="tdm-tarot-guide" data-ko="🃏 마음을 차분히 가다듬고, 오늘의 카드를 한 장 고르세요" data-en="🃏 Calm your mind and choose one card for today">🃏 마음을 차분히 가다듬고, 오늘의 카드를 한 장 고르세요</p>
+          <div class="tdm-tarot-cards" id="tdm-tarot-cards">
+            <div class="tdm-tarot-card" onclick="pickTodayTarot(0)"><div class="tdm-card-back">🌟</div></div>
+            <div class="tdm-tarot-card" onclick="pickTodayTarot(1)"><div class="tdm-card-back">🌙</div></div>
+            <div class="tdm-tarot-card" onclick="pickTodayTarot(2)"><div class="tdm-card-back">✨</div></div>
+          </div>
+        </div>
+
+        <!-- 제출 버튼 -->
+        <button id="tdm-submit-btn" class="tdm-submit" onclick="submitTodayFortune()">오늘의 운세 보기</button>
+
+      </div><!-- /tdm-form-wrap -->
+
+      <!-- 로딩 -->
+      <div id="tdm-loading" style="display:none">
+        <div class="tdm-loading-icon">🔮</div>
+        <div class="tdm-loading-text">천기를 읽는 중...</div>
+      </div>
+
+      <!-- 결과 -->
+      <div id="tdm-result" style="display:none"></div>
+
+      <!-- 다시 입력 -->
+      <div id="tdm-retry-wrap" style="display:none;text-align:center;margin-top:20px">
+        <button class="tdm-retry" onclick="resetTodayModal()">↩ <span data-ko="다시 입력하기" data-en="Try Again">다시 입력하기</span></button>
+      </div>
+
+    </div><!-- /tdm-modal -->
+  </body>
+</html>
