@@ -66,6 +66,7 @@ const i18n = {
     auth_remember: "로그인 상태 유지",
     auth_divider: "또는 구글 계정으로",
     auth_google: "구글로 로그인",
+    auth_kakao: "카카오로 로그인",
     auth_label_name: "이름",
     auth_placeholder_name: "이름을 입력하세요",
     auth_label_password_confirm: "비밀번호 확인",
@@ -80,6 +81,7 @@ const i18n = {
     login_loading: "로그인 중...",
     register_loading: "가입 중...",
     google_loading: "구글 로그인 중...",
+    kakao_loading: "카카오 로그인 중...",
     auth_popup_closed: "로그인 창이 닫혔습니다. 다시 시도해주세요.",
     auth_file_protocol_error: "⚠️ 구글 로그인은 배포된 주소에서만 가능해요.",
     auth_forgot_password: "비밀번호를 잊으셨나요?",
@@ -152,7 +154,7 @@ const i18n = {
     alert_invalid_date: "is not a valid date. Please check again.",
     alert_save_fail: "Failed to save image. Please try again.",
     tarot_instruction: "✨ Think of the person you desire<br>and choose one destiny card",
-    auth_title: "🔮 Heaven's Secret",
+    auth_title: "🔮 천기누설",
     auth_subtitle: "Please identify yourself to peek into destiny",
     auth_tab_login: "Login",
     auth_tab_register: "Sign Up",
@@ -163,6 +165,7 @@ const i18n = {
     auth_remember: "Remember me",
     auth_divider: "Or with Google account",
     auth_google: "Login with Google",
+    auth_kakao: "Login with Kakao",
     auth_label_name: "Name",
     auth_placeholder_name: "Enter your name",
     auth_label_password_confirm: "Confirm Password",
@@ -177,6 +180,7 @@ const i18n = {
     login_loading: "Logging in...",
     register_loading: "Registering...",
     google_loading: "Logging in with Google...",
+    kakao_loading: "Logging in with Kakao...",
     auth_forgot_password: "Forgot your password?",
     auth_popup_closed: "Popup closed. Please try again.",
     auth_file_protocol_error: "⚠️ Google login is only available on deployed URLs.",
@@ -217,13 +221,13 @@ const pageConfigs = {
     tenyear: { h1: '십년후운세', sub: '10년 후의 나를 읽다', doc: '천기누설 | 십년후운세', btn: '10년 후 확인하기' }
   },
   en: {
-    home: { h1: "Heaven's Secret", sub: 'A Cup of Destiny', doc: "Heaven's Secret | Fortune", btn: 'Check Fortune' },
-    newyear: { h1: 'New Year Fortune', sub: "Reading the year's flow", doc: "Heaven's Secret | New Year", btn: 'Check New Year Saju' },
-    monthly: { h1: 'Monthly Fortune', sub: 'Monthly energy changes', doc: "Heaven's Secret | Monthly", btn: 'Check Monthly Fortune' },
-    love: { h1: 'Love/Match', sub: "In search of fate's thread", doc: "Heaven's Secret | Love/Match", btn: 'Check Compatibility' },
-    worry: { h1: 'Love Trouble', sub: 'Relieving a heavy heart', doc: "Heaven's Secret | Love Trouble", btn: 'Get Prescription' },
-    meeting: { h1: 'Meeting/Fate', sub: 'Energy of new encounters', doc: "Heaven's Secret | Meeting", btn: 'Check Meeting Fortune' },
-    tenyear: { h1: '10 Years Later', sub: 'Reading myself in 10 years', doc: "Heaven's Secret | 10 Years Later", btn: 'Check 10 Years Later' }
+    home: { h1: "천기누설", sub: 'A Cup of Destiny', doc: "천기누설 | Fortune", btn: 'Check Fortune' },
+    newyear: { h1: 'New Year Fortune', sub: "Reading the year's flow", doc: "천기누설 | New Year", btn: 'Check New Year Saju' },
+    monthly: { h1: 'Monthly Fortune', sub: 'Monthly energy changes', doc: "천기누설 | Monthly", btn: 'Check Monthly Fortune' },
+    love: { h1: 'Love/Match', sub: "In search of fate's thread", doc: "천기누설 | Love/Match", btn: 'Check Compatibility' },
+    worry: { h1: 'Love Trouble', sub: 'Relieving a heavy heart', doc: "천기누설 | Love Trouble", btn: 'Get Prescription' },
+    meeting: { h1: 'Meeting/Fate', sub: 'Energy of new encounters', doc: "천기누설 | Meeting", btn: 'Check Meeting Fortune' },
+    tenyear: { h1: '10 Years Later', sub: 'Reading myself in 10 years', doc: "천기누설 | 10 Years Later", btn: 'Check 10 Years Later' }
   }
 };
 
@@ -231,9 +235,11 @@ function toggleLanguage() {
   currentLang = currentLang === 'ko' ? 'en' : 'ko';
   localStorage.setItem('chunggi_lang', currentLang);
   localStorage.setItem('cheonki_lang', currentLang);
+  window.amplitude.track('언어 전환', { language: currentLang });
+  window.amplitude.track('Language Change', { language: currentLang });
   applyLanguage();
   updateSelectOptions();
-  showPage(currentCategory); 
+  showPage(currentCategory);
 }
 
 function applyLanguage() {
@@ -387,6 +393,9 @@ function applyLanguage() {
 
     const authGoogleBtn = loginForm.querySelector('.auth-social-btn.auth-google');
     if (authGoogleBtn && authGoogleBtn.lastChild) authGoogleBtn.lastChild.textContent = ' ' + t.auth_google;
+
+    const authKakaoBtn = loginForm.querySelector('.auth-social-btn.auth-kakao');
+    if (authKakaoBtn && authKakaoBtn.lastChild) authKakaoBtn.lastChild.textContent = ' ' + t.auth_kakao;
   }
 
   const registerForm = document.getElementById('auth-register-form');
@@ -474,6 +483,9 @@ function updateSelectOptions() {
    ============================================================ */
 
 const GOOGLE_CLIENT_ID = '5735067888-lurdekg2gnkv5qqvl7dia391ofk765eo.apps.googleusercontent.com';
+const KAKAO_JS_KEY = 'fc987c72fb799e125f9cce5b34d1b9e4';
+const KAKAO_REDIRECT_URI = 'https://product-builder-test-cheonki.pages.dev';
+if (window.Kakao && !Kakao.isInitialized()) Kakao.init(KAKAO_JS_KEY);
 let _currentUser = null;
 
 function initAuth() {
@@ -486,19 +498,108 @@ function initAuth() {
         picture:  firebaseUser.photoURL  || null,
         provider: (firebaseUser.providerData[0] || {}).providerId || 'password'
       };
+      const isNewUser = !localStorage.getItem('amp_user_' + firebaseUser.uid) && !localStorage.getItem('cheonki_visited_' + firebaseUser.uid);
+      if (isNewUser) {
+        window.amplitude.track('Sign Up', { method: 'Google', email: firebaseUser.email });
+        localStorage.setItem('amp_user_' + firebaseUser.uid, 'true');
+        localStorage.setItem('cheonki_visited_' + firebaseUser.uid, 'true');
+      } else {
+        window.amplitude.track('Login', { method: 'Google', email: firebaseUser.email });
+        if (!localStorage.getItem('amp_user_' + firebaseUser.uid)) {
+          localStorage.setItem('amp_user_' + firebaseUser.uid, 'true');
+        }
+      }
       _updateNavAuth();
       hideAuthModal();
       _saveUserToFirestore(firebaseUser);
     } else {
-      _currentUser = null;
-      _updateNavAuth();
-      showAuthModal();
+      // 카카오 로그인은 Firebase Auth와 별개로 관리되므로, 세션이 남아있으면 그대로 유지한다.
+      const kakaoUser = _loadKakaoSession();
+      if (kakaoUser) {
+        _currentUser = kakaoUser;
+        _updateNavAuth();
+      } else {
+        _currentUser = null;
+        _updateNavAuth();
+        if (!sessionStorage.getItem('kakao_login_pending')) showAuthModal();
+      }
     }
   });
 }
 
 function handleSocialLogin(provider) {
   if (provider === 'google') handleGoogleLogin();
+  if (provider === 'kakao') handleKakaoLogin();
+}
+
+/* ── 카카오 로그인 ──
+   Kakao.Auth.authorize()는 인가 코드만 돌려주므로, 액세스 토큰 교환은
+   Cloudflare Pages Function(/functions/kakao-token.js)에서 REST API 키로 처리한다. */
+function handleKakaoLogin() {
+  if (window.location.protocol === 'file:') { alert(i18n[currentLang].auth_file_protocol_error); return; }
+  if (!window.Kakao || !Kakao.Auth) {
+    _showAuthError('login-error', currentLang === 'ko' ? '카카오 SDK를 불러오지 못했습니다.' : 'Failed to load Kakao SDK.');
+    return;
+  }
+  sessionStorage.setItem('kakao_login_pending', '1');
+  Kakao.Auth.authorize({ redirectUri: KAKAO_REDIRECT_URI });
+}
+
+function _handleKakaoRedirect() {
+  const code = new URLSearchParams(window.location.search).get('code');
+  if (!code) return;
+
+  // 인가 코드는 1회용이므로 새로고침 시 재사용되지 않도록 URL에서 제거
+  window.history.replaceState({}, document.title, window.location.origin + window.location.pathname);
+
+  fetch('/kakao-token', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ code, redirectUri: KAKAO_REDIRECT_URI })
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (!data.access_token) throw new Error(data.error_description || data.error || 'token_exchange_failed');
+      Kakao.Auth.setAccessToken(data.access_token);
+      return Kakao.API.request({ url: '/v2/user/me' });
+    })
+    .then(response => {
+      const profile = (response.kakao_account && response.kakao_account.profile) || response.properties || {};
+      const nickname = profile.nickname || (currentLang === 'ko' ? '카카오 사용자' : 'Kakao User');
+      const picture  = profile.profile_image_url || profile.profile_image || null;
+      const email    = (response.kakao_account && response.kakao_account.email) || null;
+
+      _currentUser = { uid: 'kakao_' + response.id, name: nickname, email, picture, provider: 'kakao' };
+
+      const isNewUser = !localStorage.getItem('amp_user_kakao_' + response.id);
+      window.amplitude.track(isNewUser ? 'Sign Up' : 'Login', { method: 'Kakao', name: nickname });
+      localStorage.setItem('amp_user_kakao_' + response.id, 'true');
+      localStorage.setItem('cheonki_kakao_user', JSON.stringify(_currentUser));
+      sessionStorage.removeItem('kakao_login_pending');
+
+      _updateNavAuth();
+      hideAuthModal();
+      showPage('home');
+    })
+    .catch(err => {
+      console.error('Kakao login error:', err);
+      sessionStorage.removeItem('kakao_login_pending');
+      _updateNavAuth();
+      showAuthModal();
+      _showAuthError('login-error', currentLang === 'ko' ? '카카오 로그인에 실패했습니다. 다시 시도해주세요.' : 'Kakao login failed. Please try again.');
+    });
+}
+
+function _loadKakaoSession() {
+  try {
+    const raw = localStorage.getItem('cheonki_kakao_user');
+    return raw ? JSON.parse(raw) : null;
+  } catch (e) { return null; }
+}
+
+function _clearKakaoSession() {
+  localStorage.removeItem('cheonki_kakao_user');
+  if (window.Kakao && Kakao.Auth) Kakao.Auth.setAccessToken(null);
 }
 
 function handlePasswordReset() {
@@ -661,8 +762,24 @@ function handleGoogleLogin() {
     });
 }
 
-function handleLogout() { auth.signOut(); }
-function skipAuth(e) { if (e) e.preventDefault(); hideAuthModal(); }
+function handleLogout() {
+  window.amplitude.track('Logout');
+  if (_currentUser && _currentUser.provider === 'kakao') {
+    _clearKakaoSession();
+    _currentUser = null;
+    _updateNavAuth();
+    showAuthModal();
+  } else {
+    auth.signOut();
+  }
+}
+function skipAuth(e) {
+  if (e) e.preventDefault();
+  const guestCount = parseInt(localStorage.getItem('cheonki_guest_count') || '0');
+  window.amplitude.track('Guest Start', { remaining: 3 - guestCount });
+  localStorage.setItem('cheonki_guest_count', guestCount + 1);
+  hideAuthModal();
+}
 function showAuthModal() { const ov = document.getElementById('auth-overlay'); if (ov) ov.style.display = 'flex'; }
 function hideAuthModal() { const ov = document.getElementById('auth-overlay'); if (ov) ov.style.display = 'none'; }
 function switchAuthTab(tab) {
@@ -796,10 +913,17 @@ function _trackPageView(pageId) {
     const today = new Date().toISOString().slice(0, 10);
     const docId  = `${today}_${pageId}`;
     db.collection('pageViews').doc(docId).set(
-      { date: today, page: pageId, count: firebase.firestore.FieldValue.increment(1) },
+      {
+        date: today,
+        page: pageId,
+        count: firebase.firestore.FieldValue.increment(1),
+        lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+      },
       { merge: true }
-    ).catch(() => {});
-  } catch(e) {}
+    ).catch(e => console.warn('[PageView] write failed:', e.code, e.message));
+  } catch(e) {
+    console.warn('[PageView] error:', e);
+  }
 }
 
 function switchTab(tabId, el) {
@@ -2623,8 +2747,10 @@ function dismissNoticeBanner() {
 
 document.addEventListener('DOMContentLoaded', function() {
   applyLanguage();
+  _handleKakaoRedirect();
   initAuth();
   loadNoticeBanner();
+  _trackPageView('home');
   const yearSelect = document.getElementById('birthYear');
   const monthSelect = document.getElementById('birthMonth');
   const daySelect = document.getElementById('birthDay');
@@ -2658,10 +2784,257 @@ function selectMeetingType(type) {
   meetingType = type;
   document.querySelectorAll('.fortune-type-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('type-' + type).classList.add('active');
-  const labels = { 
-    saju: i18n[currentLang].btn_confirm, 
-    astrology: currentLang === 'ko' ? '⭐ 점성술 확인' : '⭐ Check Astrology', 
-    tarot: currentLang === 'ko' ? '🃏 타로 선택' : '🃏 Select Tarot' 
+  const labels = {
+    saju: i18n[currentLang].btn_confirm,
+    astrology: currentLang === 'ko' ? '⭐ 점성술 확인' : '⭐ Check Astrology',
+    tarot: currentLang === 'ko' ? '🃏 타로 선택' : '🃏 Select Tarot'
   };
   document.getElementById('submit-btn').textContent = labels[type];
+}
+
+function goToService(type) {
+  openTodayModal(type);
+}
+
+/* ============================================================
+   오늘의 점괘 모달 — 홈 카드 전용 (만남 페이지와 완전 독립)
+   ============================================================ */
+
+let _tdmType = 'astrology';
+
+function openTodayModal(type) {
+  _tdmType = type;
+  const overlay = document.getElementById('tdm-overlay');
+  const modal   = document.getElementById('tdm-modal');
+  if (!overlay || !modal) return;
+
+  const now = new Date();
+  const dateEl = document.getElementById('tdm-date');
+  if (dateEl) {
+    dateEl.textContent = currentLang === 'ko'
+      ? (now.getFullYear() + '년 ' + (now.getMonth()+1) + '월 ' + now.getDate() + '일 (오늘)')
+      : (['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear() + ' (Today)');
+  }
+
+  const icons  = { saju:'🔮', astrology:'⭐', tarot:'🃏' };
+  const titles = {
+    ko:{ saju:'오늘의 사주 운세', astrology:'오늘의 별자리 운세', tarot:'오늘의 타로 한 장' },
+    en:{ saju:"Today's Saju Fortune", astrology:"Today's Astrology", tarot:"Today's Tarot Card" }
+  };
+  document.getElementById('tdm-icon').textContent  = icons[type];
+  document.getElementById('tdm-title').textContent = (titles[currentLang]||titles.ko)[type];
+
+  ['saju','astro','tarot'].forEach(function(t) {
+    var key = t === 'astro' ? 'astrology' : t;
+    var el  = document.getElementById('tdm-' + t + '-form');
+    if (el) el.style.display = (key === type) ? 'block' : 'none';
+  });
+  var submitBtn = document.getElementById('tdm-submit-btn');
+  if (submitBtn) submitBtn.style.display = type === 'tarot' ? 'none' : 'block';
+
+  document.getElementById('tdm-form-wrap').style.display  = 'block';
+  document.getElementById('tdm-loading').style.display    = 'none';
+  document.getElementById('tdm-result').style.display     = 'none';
+  document.getElementById('tdm-retry-wrap').style.display = 'none';
+  _initTdmForms();
+  _resetTdmTarot();
+
+  overlay.style.display = 'block';
+  modal.style.display   = 'block';
+  document.body.style.overflow = 'hidden';
+  window.amplitude.track('오늘의점괘 열기', { type: type });
+}
+
+function closeTodayModal() {
+  var overlay = document.getElementById('tdm-overlay');
+  var modal   = document.getElementById('tdm-modal');
+  if (overlay) overlay.style.display = 'none';
+  if (modal)   modal.style.display   = 'none';
+  document.body.style.overflow = '';
+}
+
+function resetTodayModal() {
+  document.getElementById('tdm-form-wrap').style.display  = 'block';
+  document.getElementById('tdm-loading').style.display    = 'none';
+  document.getElementById('tdm-result').style.display     = 'none';
+  document.getElementById('tdm-retry-wrap').style.display = 'none';
+  _resetTdmTarot();
+  if (_tdmType === 'tarot') document.getElementById('tdm-submit-btn').style.display = 'none';
+}
+
+function submitTodayFortune() {
+  if (_tdmType === 'astrology') _tdmSubmitAstrology();
+}
+
+function _initTdmForms() {
+  var cur = new Date();
+  var ySel = document.getElementById('tdm-year');
+  if (ySel && !ySel.options.length) {
+    for (var y = cur.getFullYear(); y >= 1930; y--)
+      ySel.add(new Option(currentLang==='ko' ? y+'년' : String(y), y));
+    ySel.value = '1990';
+  }
+  var mSel = document.getElementById('tdm-month');
+  if (mSel && !mSel.options.length)
+    for (var m=1;m<=12;m++) mSel.add(new Option(currentLang==='ko' ? m+'월' : 'Month '+m, m));
+  var dSel = document.getElementById('tdm-day');
+  if (dSel && !dSel.options.length)
+    for (var dd=1;dd<=31;dd++) dSel.add(new Option(currentLang==='ko' ? dd+'일' : 'Day '+dd, dd));
+  var hSel = document.getElementById('tdm-hour');
+  if (hSel && !hSel.options.length) {
+    var opts = currentLang==='ko'
+      ? [['모름',''],['子시 (23~01시)','23'],['丑시 (01~03시)','1'],['寅시 (03~05시)','3'],
+         ['卯시 (05~07시)','5'],['辰시 (07~09시)','7'],['巳시 (09~11시)','9'],
+         ['午시 (11~13시)','11'],['未시 (13~15시)','13'],['申시 (15~17시)','15'],
+         ['酉시 (17~19시)','17'],['戌시 (19~21시)','19'],['亥시 (21~23시)','21']]
+      : [['Unknown',''],['子 (23-01)','23'],['丑 (01-03)','1'],['寅 (03-05)','3'],
+         ['卯 (05-07)','5'],['辰 (07-09)','7'],['巳 (09-11)','9'],
+         ['午 (11-13)','11'],['未 (13-15)','13'],['申 (15-17)','15'],
+         ['酉 (17-19)','17'],['戌 (19-21)','19'],['亥 (21-23)','21']];
+    opts.forEach(function(o){ hSel.add(new Option(o[0],o[1])); });
+  }
+  var nInp = document.getElementById('tdm-name');
+  if (nInp) {
+    nInp.placeholder = currentLang==='ko' ? '성함을 입력하세요 (선택)' : 'Your name (optional)';
+    try { var s=localStorage.getItem('chunggi_name'); if(s) nInp.value=s; } catch(e){}
+  }
+  var amSel = document.getElementById('tdm-astro-month');
+  if (amSel && !amSel.options.length) {
+    for (var am=1;am<=12;am++) amSel.add(new Option(currentLang==='ko' ? am+'월' : 'Month '+am, am));
+    amSel.value = cur.getMonth()+1;
+  }
+  var adSel = document.getElementById('tdm-astro-day');
+  if (adSel && !adSel.options.length) {
+    for (var ad=1;ad<=31;ad++) adSel.add(new Option(currentLang==='ko' ? ad+'일' : 'Day '+ad, ad));
+    adSel.value = cur.getDate();
+  }
+}
+
+function _resetTdmTarot() {
+  var c = document.getElementById('tdm-tarot-cards');
+  if (!c) return;
+  c.innerHTML = '<div class="tdm-tarot-card" onclick="pickTodayTarot(0)"><div class="tdm-card-back">🌟</div></div>' +
+                '<div class="tdm-tarot-card" onclick="pickTodayTarot(1)"><div class="tdm-card-back">🌙</div></div>' +
+                '<div class="tdm-tarot-card" onclick="pickTodayTarot(2)"><div class="tdm-card-back">✨</div></div>';
+}
+
+function _tdmLoading(type) {
+  document.getElementById('tdm-form-wrap').style.display = 'none';
+  document.getElementById('tdm-result').style.display    = 'none';
+  document.getElementById('tdm-loading').style.display   = 'block';
+  var msgs = {
+    ko:{ saju:'🔮 사주 천기를 읽는 중...', astrology:'⭐ 별자리 기운을 분석하는 중...', tarot:'🃏 카드의 메시지를 읽는 중...' },
+    en:{ saju:'🔮 Reading your saju...', astrology:'⭐ Analyzing celestial signs...', tarot:"🃏 Reading the card's message..." }
+  };
+  var txt = document.querySelector('#tdm-loading .tdm-loading-text');
+  if (txt) txt.textContent = (msgs[currentLang]||msgs.ko)[type];
+}
+
+function _tdmShowResult(html) {
+  document.getElementById('tdm-loading').style.display    = 'none';
+  document.getElementById('tdm-result').style.display     = 'block';
+  document.getElementById('tdm-result').innerHTML         = html;
+  document.getElementById('tdm-retry-wrap').style.display = 'block';
+  setTimeout(function() {
+    document.querySelectorAll('.tdm-bar-fill').forEach(function(bar) {
+      if (bar.dataset.score) bar.style.width = bar.dataset.score + '%';
+    });
+  }, 80);
+}
+
+function _tdmColor(s) { return s>=85 ? '#e2c06a' : s>=65 ? '#7ec8e3' : '#c06060'; }
+function _tdmEmoji(s) { return s>=90 ? '🌟' : s>=75 ? '😊' : s>=60 ? '😐' : '😔'; }
+
+function _tdmBar(label, score) {
+  var lk = currentLang;
+  return '<div class="tdm-score-row">' +
+    '<span class="tdm-score-label">' + label + '</span>' +
+    '<div class="tdm-bar-bg"><div class="tdm-bar-fill" data-score="' + score + '" style="width:0%;background:' + _tdmColor(score) + '"></div></div>' +
+    '<span class="tdm-score-num" style="color:' + _tdmColor(score) + '">' + score + (lk==='ko'?'점':'pts') + ' ' + _tdmEmoji(score) + '</span>' +
+  '</div>';
+}
+
+/* 점성술 */
+function _tdmSubmitAstrology() {
+  var month = parseInt(document.getElementById('tdm-astro-month').value);
+  var day   = parseInt(document.getElementById('tdm-astro-day').value);
+  if (!month||!day) { alert(currentLang==='ko'?'태어난 월과 일을 선택해주세요.':'Please select your birth month and day.'); return; }
+  _tdmLoading('astrology');
+  setTimeout(function(){ _tdmShowResult(_tdmAstroHTML(month, day)); }, 1500);
+}
+
+function _tdmAstroHTML(month, day) {
+  function getSign(m,d){ for(var i=0;i<ZODIAC_LIST.length;i++){var z=ZODIAC_LIST[i];var r=z.range;if((m===r[0]&&d>=r[1])||(m===r[2]&&d<=r[3]))return z;} return ZODIAC_LIST[0]; }
+  var sign = getSign(month, day);
+  var info = ZODIAC_INFO[sign.ko] || ZODIAC_INFO['염소자리'];
+  var lk   = currentLang;
+  var d    = lk==='ko' ? info.ko : info.en;
+  var signLabel = lk==='ko' ? sign.ko : sign.en;
+  var today = new Date();
+  var seed  = month*100+day+today.getFullYear()*10000+today.getMonth()*100+today.getDate();
+  function rng(o,min,max){ return min+Math.abs((seed+o*17317)%(max-min+1)); }
+  var scores = { total:rng(1,60,98), wealth:rng(2,55,95), love:rng(3,55,95), career:rng(4,55,95), health:rng(5,55,95) };
+  var msgs = {
+    ko:[signLabel+'의 에너지가 오늘 특히 강하게 빛납니다. 자신의 강점을 믿고 나아가세요.',
+        '오늘 하늘의 기운이 '+signLabel+'를 응원합니다. 직관을 따르면 좋은 결과가 따라옵니다.',
+        d.trait+'의 특성이 오늘 더욱 빛을 발합니다. 이 에너지를 긍정적으로 활용해보세요.'],
+    en:[signLabel+' energy shines especially bright today. Trust your strengths and move forward.',
+        "Today's sky cheers on "+signLabel+'. Good outcomes follow when you trust your intuition.',
+        'Your trait "'+d.trait+'" shines even brighter today. Channel this energy positively.']
+  };
+  var todayMsg = msgs[lk][today.getDate()%3];
+  var L = lk==='ko'
+    ? {score:'오늘 운세',wealth:'금전운',love:'애정운',career:'직장운',health:'건강운',msg:'오늘의 메시지'}
+    : {score:"Today's Score",wealth:'Wealth',love:'Love',career:'Career',health:'Health',msg:"Today's Message"};
+  return '<div class="tdm-result-card">' +
+    '<div class="tdm-result-head"><div class="tdm-astro-sign-header"><span class="tdm-astro-symbol">'+sign.symbol+'</span><div><div class="tdm-result-name">'+signLabel+'</div><div class="tdm-astro-trait">'+d.trait+'</div></div></div><div class="tdm-result-overall">'+L.score+' <strong style="color:#e2c06a">'+scores.total+(lk==='ko'?'점':'pts')+'</strong></div></div>' +
+    '<div class="tdm-scores">'+_tdmBar(L.wealth,scores.wealth)+_tdmBar(L.love,scores.love)+_tdmBar(L.career,scores.career)+_tdmBar(L.health,scores.health)+'</div>' +
+    '<div class="tdm-divider"></div>' +
+    '<div class="tdm-advice-box"><div class="tdm-advice-title">⭐ '+L.msg+'</div><div class="tdm-advice-text">'+todayMsg+'</div></div>' +
+    '<div class="tdm-advice-box" style="margin-top:12px"><div class="tdm-advice-title" style="font-size:.78rem;opacity:.7">💰 '+L.wealth+'</div><div class="tdm-advice-text" style="font-size:.82rem">'+d.wealth+'</div></div>' +
+    '<div class="tdm-advice-box" style="margin-top:10px"><div class="tdm-advice-title" style="font-size:.78rem;opacity:.7">💕 '+L.love+'</div><div class="tdm-advice-text" style="font-size:.82rem">'+d.love+'</div></div>' +
+  '</div>';
+}
+
+/* 타로 */
+function pickTodayTarot(pos) {
+  var cardsEl = document.getElementById('tdm-tarot-cards');
+  if (!cardsEl) return;
+  cardsEl.querySelectorAll('.tdm-tarot-card').forEach(function(c,i) {
+    c.onclick = null;
+    if (i!==pos) c.style.opacity='0.28';
+    else         c.classList.add('tdm-card-picked');
+  });
+  _tdmLoading('tarot');
+  setTimeout(function(){ _tdmShowResult(_tdmTarotHTML()); }, 1500);
+}
+
+function _tdmTarotHTML() {
+  var card = TAROT_CARDS_RICH[Math.floor(Math.random()*TAROT_CARDS_RICH.length)];
+  var lk   = currentLang;
+  var d    = card[lk];
+  var today = new Date();
+  var msgs = {
+    ko:['이 카드는 오늘 하루 당신에게 중요한 메시지를 전합니다. 마음속 깊이 새겨보세요.',
+        '우주가 오늘 이 카드를 통해 당신에게 말을 걸고 있습니다. 귀 기울여 보세요.',
+        '오늘의 선택, 오늘의 카드. 이 에너지와 함께 하루를 시작하세요.'],
+    en:['This card carries an important message for you today. Take it to heart.',
+        'The universe speaks to you through this card today. Listen closely.',
+        "Today's choice, today's card. Begin your day with this energy."]
+  };
+  var todayMsg  = msgs[lk][today.getDate()%3];
+  var parts     = d.total.split('\n\n');
+  var shortMsg  = parts.length > 2 ? parts[2] : d.total.split('\n')[0];
+  var cardName  = card.name[lk];
+  var L = lk==='ko'
+    ? {cardName:'오늘의 카드',msg:'오늘의 메시지',wealth:'금전',love:'애정'}
+    : {cardName:"Today's Card",msg:"Today's Message",wealth:'Wealth',love:'Love'};
+  return '<div class="tdm-result-card">' +
+    '<div class="tdm-tarot-result-head"><div class="tdm-tarot-emoji">'+card.emoji+'</div><div><div class="tdm-tarot-result-name">'+cardName+'</div><div class="tdm-tarot-subtitle">'+L.cardName+'</div></div></div>' +
+    '<div class="tdm-divider"></div>' +
+    '<div class="tdm-advice-box"><div class="tdm-advice-title">🌟 '+L.msg+'</div><div class="tdm-advice-text">'+todayMsg+'</div></div>' +
+    '<div class="tdm-advice-box" style="margin-top:12px"><div class="tdm-advice-title">💡 '+(lk==='ko'?'오늘 하루 조언':"Today's Advice")+'</div><div class="tdm-advice-text">'+shortMsg+'</div></div>' +
+    '<div class="tdm-advice-box" style="margin-top:10px"><div class="tdm-advice-title" style="font-size:.78rem;opacity:.7">💰 '+L.wealth+'</div><div class="tdm-advice-text" style="font-size:.82rem">'+d.wealth+'</div></div>' +
+    '<div class="tdm-advice-box" style="margin-top:10px"><div class="tdm-advice-title" style="font-size:.78rem;opacity:.7">💕 '+L.love+'</div><div class="tdm-advice-text" style="font-size:.82rem">'+d.love+'</div></div>' +
+  '</div>';
 }

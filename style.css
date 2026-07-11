@@ -1,3 +1,16 @@
+/* 메뉴바 · 본문 콘텐츠 좌우 여백 통일용 변수 (데스크탑 40px / 태블릿 24px / 모바일 16px) */
+:root {
+  --page-gutter: 40px;
+}
+
+@media (max-width: 1024px) {
+  :root { --page-gutter: 24px; }
+}
+
+@media (max-width: 600px) {
+  :root { --page-gutter: 16px; }
+}
+
 /* 공지사항 배너가 표시될 때 body 상단 여백 확장 */
 body.has-notice-banner {
   padding-top: 116px;
@@ -5,7 +18,7 @@ body.has-notice-banner {
 
 body {
   font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
-  padding: 80px 15px 40px;
+  padding: 80px 0 40px;
   background: #0a0e14;
   color: #e0e0e0;
   display: flex;
@@ -109,11 +122,13 @@ body {
 
 .nav-container {
   max-width: 1200px;
+  width: 100%;
+  box-sizing: border-box;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 var(--page-gutter);
   height: 60px;
 }
 
@@ -167,12 +182,12 @@ body {
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  max-width: 650px;
+  max-width: 1200px;
   width: 100%;
-  padding: 40px;
+  padding: 40px var(--page-gutter);
   border-radius: 24px;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
-  margin-top: 20px;
+  margin: 20px auto 0;
   box-sizing: border-box;
 }
 
@@ -990,6 +1005,18 @@ h1 {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
 }
 
+.auth-kakao {
+  background: #FEE500;
+  color: #191919;
+  border: 1px solid #FEE500;
+  margin-bottom: 0;
+}
+.auth-kakao:hover {
+  background: #f5dc00;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
 /* Google GSI 버튼 컨테이너 */
 .google-signin-wrap {
   width: 100%;
@@ -1050,11 +1077,10 @@ h1 {
 /* 모바일 최적화 */
 @media (max-width: 600px) {
   body {
-    padding: 105px 10px 20px; /* 60px nav + 45px 2줄 메뉴 */
+    padding: 105px 0 20px; /* 60px nav + 45px 2줄 메뉴 */
   }
 
   .nav-container {
-    padding: 0 15px;
     height: 50px;
   }
 
@@ -1070,7 +1096,7 @@ h1 {
     background: rgba(10, 14, 20, 0.95);
     height: 45px;
     overflow-x: auto;
-    padding: 0 15px;
+    padding: 0 var(--page-gutter);
     border-bottom: 1px solid rgba(197, 160, 89, 0.1);
     gap: 15px;
     scrollbar-width: none;
@@ -1099,7 +1125,7 @@ h1 {
   .auth-subtitle { font-size: 0.74rem; }
 
   .box {
-    padding: 25px 15px;
+    padding: 25px var(--page-gutter);
     border-radius: 20px;
     margin-top: 0;             /* body padding으로 처리하므로 0 */
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
@@ -1663,9 +1689,11 @@ h1 {
 
 /* ── 콘텐츠 섹션 (SEO 강화) ── */
 .content-sections {
-  max-width: 860px;
+  max-width: 1200px;
+  width: 100%;
+  box-sizing: border-box;
   margin: 40px auto 0;
-  padding: 0 20px;
+  padding: 0 var(--page-gutter);
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -1734,9 +1762,11 @@ h1 {
 
 /* ── 사이트 푸터 ── */
 .site-footer {
-  max-width: 860px;
+  max-width: 1200px;
+  width: 100%;
+  box-sizing: border-box;
   margin: 40px auto 30px;
-  padding: 28px 20px;
+  padding: 28px var(--page-gutter);
   text-align: center;
   border-top: 1px solid rgba(197, 160, 89, 0.15);
 }
@@ -1770,7 +1800,316 @@ h1 {
 }
 
 @media (max-width: 600px) {
-  .content-sections { padding: 0 10px; margin-top: 24px; gap: 16px; }
+  .content-sections { margin-top: 24px; gap: 16px; }
   .content-section { padding: 20px 16px; }
-  .site-footer { margin: 24px auto 20px; padding: 20px 10px; }
+  .site-footer { margin: 24px auto 20px; padding: 20px var(--page-gutter); }
+}
+
+/* 서비스 소개 카드 2종 */
+.service-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin: 20px 0 28px;
+}
+.service-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(197,160,89,0.2);
+  border-radius: 14px;
+  padding: 22px 16px;
+  text-align: center;
+  transition: all 0.25s;
+  user-select: none;
+}
+.service-card:hover {
+  border-color: rgba(197,160,89,0.6);
+  background: rgba(197,160,89,0.08);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+}
+.sc-icon {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+.sc-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #e2c06a;
+  margin-bottom: 6px;
+  letter-spacing: 0.04em;
+}
+.sc-desc {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.55;
+}
+@media (max-width: 600px) {
+  .service-cards { grid-template-columns: 1fr; }
+}
+
+/* ====================================================
+   오늘의 점괘 모달 (tdm-*)
+   ==================================================== */
+#tdm-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  z-index: 1000;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+#tdm-modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001;
+  width: 92%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #0e0e1a;
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  border-radius: 20px;
+  padding: 0 22px 30px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(197,160,89,0.3) transparent;
+}
+#tdm-modal::-webkit-scrollbar { width: 4px; }
+#tdm-modal::-webkit-scrollbar-thumb { background: rgba(197,160,89,0.3); border-radius: 2px; }
+
+/* 헤더 */
+.tdm-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 22px 0 18px;
+  border-bottom: 1px solid rgba(197,160,89,0.18);
+  margin-bottom: 22px;
+  position: sticky;
+  top: 0;
+  background: #0e0e1a;
+  z-index: 5;
+}
+.tdm-icon-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #e2c06a;
+}
+#tdm-icon { font-size: 1.3rem; }
+.tdm-date {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.4);
+  margin-top: 4px;
+}
+.tdm-close {
+  background: none;
+  border: 1px solid rgba(197,160,89,0.35);
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+  font-size: 1rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.tdm-close:hover { background: rgba(197,160,89,0.12); color: #fff; border-color: #c5a059; }
+
+/* 폼 */
+.tdm-field { margin-bottom: 16px; }
+.tdm-label {
+  display: block;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 7px;
+}
+.tdm-input {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(197,160,89,0.25);
+  border-radius: 10px;
+  color: #fff;
+  padding: 10px 14px;
+  font-size: 0.92rem;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.tdm-input:focus { border-color: rgba(197,160,89,0.6); }
+.tdm-row { display: flex; gap: 8px; }
+.tdm-select {
+  flex: 1;
+  background: #1a1228;
+  border: 1px solid rgba(197,160,89,0.25);
+  border-radius: 10px;
+  color: #fff;
+  padding: 10px 8px;
+  font-size: 0.88rem;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a84c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
+}
+.tdm-select:focus { border-color: rgba(197,160,89,0.6); }
+.tdm-select option {
+  background: #1a1228;
+  color: #fff;
+}
+.tdm-select option:checked {
+  background: #c9a84c;
+  color: #1a1228;
+}
+.tdm-select-full { width: 100%; flex: none; }
+.tdm-hint {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.35);
+  margin: 4px 0 0;
+  text-align: center;
+}
+
+/* 타로 카드 선택 */
+.tdm-tarot-guide {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.65);
+  text-align: center;
+  margin: 0 0 20px;
+  line-height: 1.5;
+}
+.tdm-tarot-cards {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.tdm-tarot-card {
+  flex: 1;
+  max-width: 120px;
+  aspect-ratio: 2/3;
+  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  border: 2px solid rgba(197,160,89,0.4);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.tdm-tarot-card:hover { border-color: #e2c06a; transform: translateY(-4px); box-shadow: 0 8px 24px rgba(197,160,89,0.2); }
+.tdm-card-back { font-size: 2rem; }
+.tdm-card-picked { border-color: #e2c06a; box-shadow: 0 0 20px rgba(226,192,106,0.4); }
+
+/* 제출 버튼 */
+.tdm-submit {
+  width: 100%;
+  margin-top: 22px;
+  padding: 14px;
+  background: linear-gradient(135deg, #c9a84c, #e2c06a);
+  color: #0a0a0f;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.03em;
+}
+.tdm-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(197,160,89,0.35); }
+
+/* 로딩 */
+#tdm-loading {
+  text-align: center;
+  padding: 50px 20px;
+}
+.tdm-loading-icon {
+  font-size: 2.5rem;
+  animation: tdmPulse 1.5s ease-in-out infinite;
+  margin-bottom: 16px;
+}
+.tdm-loading-text { font-size: 0.9rem; color: rgba(255,255,255,0.55); }
+@keyframes tdmPulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.2);opacity:0.7} }
+
+/* 결과 카드 */
+.tdm-result-card { padding: 4px 0; }
+.tdm-result-head { margin-bottom: 20px; }
+.tdm-result-name { font-size: 1rem; font-weight: 700; color: #e2c06a; margin-bottom: 4px; }
+.tdm-result-overall { font-size: 0.85rem; color: rgba(255,255,255,0.5); }
+.tdm-astro-sign-header { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+.tdm-astro-symbol { font-size: 2rem; }
+.tdm-astro-trait { font-size: 0.78rem; color: rgba(255,255,255,0.45); margin-top: 2px; }
+.tdm-tarot-result-head { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+.tdm-tarot-emoji { font-size: 2.4rem; }
+.tdm-tarot-result-name { font-size: 1rem; font-weight: 700; color: #e2c06a; }
+.tdm-tarot-subtitle { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 3px; }
+
+/* 점수 바 */
+.tdm-scores { display: flex; flex-direction: column; gap: 10px; margin-bottom: 4px; }
+.tdm-score-row { display: flex; align-items: center; gap: 10px; }
+.tdm-score-label { font-size: 0.78rem; color: rgba(255,255,255,0.55); width: 44px; flex-shrink: 0; }
+.tdm-bar-bg { flex: 1; height: 7px; background: rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden; }
+.tdm-bar-fill { height: 100%; border-radius: 4px; transition: width 0.9s cubic-bezier(.4,0,.2,1); width: 0%; }
+.tdm-score-num { font-size: 0.78rem; width: 68px; flex-shrink: 0; text-align: right; }
+
+/* 구분선 */
+.tdm-divider { height: 1px; background: rgba(197,160,89,0.14); margin: 18px 0; }
+
+/* 일진 */
+.tdm-day-info { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; font-size: 0.8rem; }
+.tdm-day-label { color: rgba(255,255,255,0.4); }
+.tdm-day-value { color: rgba(226,192,106,0.8); }
+
+/* 조언 박스 */
+.tdm-advice-box {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(197,160,89,0.15);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+.tdm-advice-title { font-size: 0.82rem; font-weight: 700; color: #c9a84c; margin-bottom: 8px; }
+.tdm-advice-text { font-size: 0.88rem; color: rgba(255,255,255,0.75); line-height: 1.65; }
+
+/* 행운 박스 */
+.tdm-lucky-box {
+  background: rgba(197,160,89,0.06);
+  border: 1px solid rgba(197,160,89,0.2);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-top: 14px;
+}
+.tdm-lucky-title { font-size: 0.82rem; font-weight: 700; color: #c9a84c; margin-bottom: 12px; }
+.tdm-lucky-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.tdm-lucky-item { text-align: center; }
+.tdm-lucky-label { font-size: 0.7rem; color: rgba(255,255,255,0.4); margin-bottom: 5px; }
+.tdm-lucky-val { font-size: 0.88rem; font-weight: 700; color: #e2c06a; }
+
+/* 다시 입력 버튼 */
+.tdm-retry {
+  background: none;
+  border: 1px solid rgba(197,160,89,0.3);
+  color: rgba(255,255,255,0.5);
+  padding: 10px 24px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+.tdm-retry:hover { border-color: #c9a84c; color: #c9a84c; }
+
+@media (max-width: 600px) {
+  #tdm-modal { padding: 0 16px 24px; max-height: 95vh; }
+  .tdm-tarot-cards { gap: 10px; }
+  .tdm-lucky-grid { grid-template-columns: repeat(3,1fr); gap: 6px; }
 }
