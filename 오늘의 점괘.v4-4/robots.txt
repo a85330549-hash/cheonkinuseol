@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /admin.html
-
-Sitemap: https://product-builder-test-cheonki.pages.dev/sitemap.xml
