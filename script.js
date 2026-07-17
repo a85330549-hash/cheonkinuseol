@@ -8,6 +8,35 @@
 
 let currentLang = localStorage.getItem('chunggi_lang') || localStorage.getItem('cheonki_lang') || 'ko';
 
+/* ============================================================
+   AdSense 조건부 로딩 (콘텐츠 없는 화면 광고 게재 정책 대응)
+   실제 운세/타로 결과가 표시된 상태(data-page-type="result")에서만
+   Auto ads 스크립트를 로드한다. 폼/로그인/로딩 화면에서는 로드하지 않고,
+   이미 로드된 광고가 있으면 제거한다.
+   ============================================================ */
+let _adsScriptLoaded = false;
+function _setAdPageType(type) {
+  if (!document.body) return;
+  document.body.setAttribute('data-page-type', type);
+  if (type === 'result') _loadAdsenseScript();
+  else _removeAdsenseAds();
+}
+function _loadAdsenseScript() {
+  if (_adsScriptLoaded) {
+    try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
+    return;
+  }
+  _adsScriptLoaded = true;
+  const s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8164358198547815';
+  s.crossOrigin = 'anonymous';
+  document.head.appendChild(s);
+}
+function _removeAdsenseAds() {
+  document.querySelectorAll('ins.adsbygoogle').forEach(el => el.remove());
+}
+
 const i18n = {
   ko: {
     langBtn: "English",
@@ -628,6 +657,7 @@ function handlePasswordReset() {
   if (successMsg) successMsg.innerHTML = t.pw_reset_success_msg;
 
   document.getElementById('pw-reset-overlay').style.display = 'flex';
+  _setAdPageType('auth');
   setTimeout(() => { if (resetInput) resetInput.focus(); }, 80);
 }
 
@@ -665,6 +695,8 @@ function hidePasswordResetModal(e) {
   if (resetInput) resetInput.value = '';
   const btn = document.getElementById('pw-reset-submit-btn');
   if (btn) { btn.textContent = i18n[currentLang].pw_reset_submit; btn.disabled = false; }
+  const result = document.getElementById('result');
+  _setAdPageType(result && result.innerHTML.trim() !== '' ? 'result' : 'form');
 }
 
 function _pwResetShowForm() {
@@ -780,8 +812,12 @@ function skipAuth(e) {
   localStorage.setItem('cheonki_guest_count', guestCount + 1);
   hideAuthModal();
 }
-function showAuthModal() { const ov = document.getElementById('auth-overlay'); if (ov) ov.style.display = 'flex'; }
-function hideAuthModal() { const ov = document.getElementById('auth-overlay'); if (ov) ov.style.display = 'none'; }
+function showAuthModal() { const ov = document.getElementById('auth-overlay'); if (ov) ov.style.display = 'flex'; _setAdPageType('auth'); }
+function hideAuthModal() {
+  const ov = document.getElementById('auth-overlay'); if (ov) ov.style.display = 'none';
+  const result = document.getElementById('result');
+  _setAdPageType(result && result.innerHTML.trim() !== '' ? 'result' : 'form');
+}
 function switchAuthTab(tab) {
   document.getElementById('auth-login-form').style.display = tab === 'login' ? 'block' : 'none';
   document.getElementById('auth-register-form').style.display = tab === 'register' ? 'block' : 'none';
@@ -891,6 +927,7 @@ function showPage(pageId) {
 
   resultArea.innerHTML = '';
   resultTabs.style.display = 'none';
+  _setAdPageType('form');
 
   const config = pageConfigs[currentLang][pageId];
   if (config) { title.innerText = config.h1; subtitle.innerText = config.sub; document.title = config.doc; submitBtn.innerText = config.btn; }
@@ -973,6 +1010,7 @@ function getFortune() {
   loading.textContent = meetingType === 'tarot' ? t.loading_tarot : meetingType === 'astrology' ? t.loading_astrology : t.loading_saju;
   result.innerHTML = '';
   resultTabs.style.display = 'none';
+  _setAdPageType('loading');
   const tarotArea = document.getElementById('tarot-cards-area');
   if (tarotArea) tarotArea.style.display = 'none';
 
@@ -987,6 +1025,7 @@ function getFortune() {
     }
     cachedFortune = fortuneData;
     result.innerHTML = fortuneData.html;
+    _setAdPageType('result');
     if (meetingType === 'astrology') {
       setTimeout(() => renderAstroChart(year, month, day, 'astro-chart-canvas'), 100);
     }
@@ -994,6 +1033,7 @@ function getFortune() {
     actionArea.className = 'action-area'; actionArea.style.textAlign = 'center'; actionArea.style.marginTop = '25px';
     actionArea.innerHTML = `<button onclick="downloadFortuneImage()" class="save-btn">${t.btn_save_image}</button>`;
     result.appendChild(actionArea);
+    result.insertAdjacentHTML('beforeend', _buildSajuConceptBox());
     resultTabs.style.display = 'flex';
     document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
     const firstTab = document.querySelector('.tab-item');
@@ -1420,6 +1460,47 @@ function buildClassicSajuHTML(name, saju, bYear, bMonth, bDay, gender, lang) {
     <div class="csj-ys-tip">💡 옷이나 소품에 <span style="color:${yAttr.colorHex}">${yAttr.colorKo}</span> 계열을, <span>${yAttr.direction}</span> 방향으로 이동하거나 앉으면 운이 상승합니다.</div>
   </div>
 </div>`;
+}
+
+/* ============================================================
+   명리학 기초 개념 설명 박스 (콘텐츠 보강용, 결과 화면 하단에 공통 노출)
+   ============================================================ */
+function _buildSajuConceptBox() {
+  if (currentLang === 'en') {
+    return `
+      <div class="csj-sec">
+        <div class="csj-sec-title">📖 What Is Saju (Four Pillars of Destiny)?</div>
+        <p class="content" style="margin-bottom:10px">Saju (四柱), literally "Four Pillars," refers to the eight characters formed by the Heavenly Stem (天干) and Earthly Branch (地支) of your birth year, month, day, and hour — commonly known as "Four Pillars, Eight Characters" (四柱八字). Each of these eight characters carries a mix of the Five Elements — Wood, Fire, Earth, Metal, and Water — and the balance among them forms the basis for describing a person's innate tendencies and the flow of their life.</p>
+        <p class="content" style="margin-bottom:10px">Classical Korean astrology (Myeongrihak, 命理學) interprets fortune through how these Five Elements generate one another (相生, Sangsaeng) or restrain one another (相克, Sangguk). The Day Master and Favorable Element shown in your result above are both derived from this same Five-Elements theory, not from random chance.</p>
+        <p class="content" style="font-size:.8rem;opacity:.6">※ This content is reference material for entertainment purposes, based on traditional Four Pillars theory.</p>
+      </div>`;
+  }
+  return `
+    <div class="csj-sec">
+      <div class="csj-sec-title">📖 사주란 무엇인가요?</div>
+      <p class="content" style="margin-bottom:10px">사주(四柱)란 태어난 연·월·일·시 네 기둥을 각각 천간(天干)과 지지(地支)로 나타낸 여덟 글자, 즉 '사주팔자(四柱八字)'를 말합니다. 이 여덟 글자에는 목(木)·화(火)·토(土)·금(金)·수(水) 오행(五行)의 기운이 서로 다른 비율로 섞여 있으며, 이 균형이 한 사람의 타고난 성향과 삶의 흐름을 설명하는 기초가 됩니다.</p>
+      <p class="content" style="margin-bottom:10px">명리학(命理學)에서는 오행이 서로를 낳아주는 상생(相生)과 서로를 억누르는 상극(相克)의 관계를 통해 운의 흐름을 해석합니다. 위 결과에 표시된 일간(日干)과 용신(用神) 역시 이러한 오행 이론에 근거해 도출된 것으로, 임의로 정해진 것이 아닙니다.</p>
+      <p class="content" style="font-size:.8rem;opacity:.6">※ 본 콘텐츠는 전통 명리학 이론에 기반한 오락 목적의 참고 자료입니다.</p>
+    </div>`;
+}
+
+function _buildTarotConceptBox() {
+  if (currentLang === 'en') {
+    return `
+      <div class="csj-sec">
+        <div class="csj-sec-title">🃏 What Is Tarot Reading?</div>
+        <p class="content" style="margin-bottom:10px">Tarot is a deck of 78 symbolic cards — 22 Major Arcana representing major life themes and 56 Minor Arcana representing everyday situations. Each card carries its own imagery and meaning, and the position it's drawn into (past, present, future, advice, etc.) shapes how that meaning is read.</p>
+        <p class="content" style="margin-bottom:10px">A reading doesn't predict a fixed future — it reflects the energy and possibilities surrounding your question at this moment, and is best used as a prompt for self-reflection rather than an absolute answer.</p>
+        <p class="content" style="font-size:.8rem;opacity:.6">※ This content is reference material for entertainment purposes, based on traditional Tarot symbolism.</p>
+      </div>`;
+  }
+  return `
+    <div class="csj-sec">
+      <div class="csj-sec-title">🃏 타로카드란 무엇인가요?</div>
+      <p class="content" style="margin-bottom:10px">타로는 인생의 큰 주제를 상징하는 메이저 아르카나 22장과 일상적인 상황을 나타내는 마이너 아르카나 56장, 총 78장으로 이루어진 카드입니다. 각 카드는 고유한 그림과 의미를 지니고 있으며, 카드가 뽑힌 자리(과거·현재·미래·조언 등)에 따라 해석이 달라집니다.</p>
+      <p class="content" style="margin-bottom:10px">타로는 정해진 미래를 맞히는 도구가 아니라, 지금 이 순간 질문을 둘러싼 기운과 가능성을 비추어 스스로를 돌아보게 하는 참고 자료로 활용하는 것이 좋습니다.</p>
+      <p class="content" style="font-size:.8rem;opacity:.6">※ 본 콘텐츠는 전통 타로 상징 체계에 기반한 오락 목적의 참고 자료입니다.</p>
+    </div>`;
 }
 
 function calcSaju(year, month, day) {
@@ -2674,11 +2755,14 @@ function selectTarotCard(i) {
   const name = document.getElementById('userName').value.trim() || (currentLang === 'ko' ? '사용자' : 'Guest');
   document.getElementById('loading').style.display = 'block';
   document.getElementById('loading').textContent = t.loading_tarot;
+  _setAdPageType('loading');
   setTimeout(() => {
     document.getElementById('loading').style.display = 'none';
     const res = generateTarotFortune(name);
     document.getElementById('result').innerHTML = res.html;
+    document.getElementById('result').insertAdjacentHTML('beforeend', _buildTarotConceptBox());
     document.getElementById('result-tabs').style.display = 'flex';
+    _setAdPageType('result');
     cachedFortune = res;
     window.scrollTo({ top: document.getElementById('result').offsetTop - 100, behavior: 'smooth' });
     if (res.isSuperLucky) launchConfetti();

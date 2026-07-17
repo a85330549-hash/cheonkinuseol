@@ -79,11 +79,9 @@
       !function(){"use strict";!function(e,t){var r=e.amplitude||{_q:[],_iq:{}};if(r.invoked)e.console&&console.error&&console.error("Amplitude snippet has been loaded.");amplitude.init('ee18b57d19c1f37af1e1f895ced12b7b');}(window,document)}();
     </script>
 
-    <!-- AdSense -->
-    <script async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8164358198547815"
-      crossorigin="anonymous">
-    </script>
+    <!-- AdSense: 이 페이지는 폼/로그인/로딩 등 콘텐츠가 없는 상태를 포함하는 SPA이므로
+         스크립트를 여기서 무조건 로드하지 않는다. 실제 운세 결과가 표시될 때만
+         script.js의 _setAdPageType('result')가 동적으로 로드한다. -->
 
     <link rel="icon" href="img/메인베너.png">
 
@@ -119,7 +117,7 @@
       });
     </script>
   </head>
-  <body>
+  <body data-page-type="form">
     <!-- 카카오톡 인앱 브라우저 감지 팝업 -->
     <script>
       if (/KAKAOTALK/i.test(navigator.userAgent)) {
